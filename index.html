@@ -2,673 +2,496 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>GAMSTER TIER · GUC TEST RESULTS</title>
-  <!-- Tailwind + Font Awesome Icons -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>GAMSTER TIER · GUC | BIG SQUARE IMAGES FOR TOP 3</title>
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Google Fonts Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
   <style>
-    * { font-family: 'Plus Jakarta Sans', sans-serif; }
-    
-    /* Gamster Theme Colors */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, .certificate-card, .certificate-card * {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-smoothing: antialiased;
+    }
     :root {
-      --gamster-bg: #0a0e27;
-      --gamster-dark: #13183a;
-      --gamster-darker: #0c1030;
-      --gamster-light: #1a1f4a;
-      --gamster-primary: #00d4ff;
-      --gamster-secondary: #7b2ff7;
-      --gamster-green: #00ff88;
-      --gamster-yellow: #ffcc00;
-      --gamster-red: #ff3366;
-      --gamster-text: #e8e9f3;
-      --gamster-muted: #8890b5;
+      --bg-deep: #0a0c12;
+      --bg-card: #11161f;
+      --bg-elevated: #161e2c;
+      --accent-primary: #3b82f6;
+      --border-subtle: #253041;
+    }
+    body { background: var(--bg-deep); color: #ffffff; overflow-x: hidden; }
+    .gamster-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 28px; box-shadow: 0 20px 35px -10px rgba(0,0,0,0.6); }
+    
+    /* ===== UNIFORM TIER BADGES — ALL COLORS FIXED ===== */
+    .tier-badge-base {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 92px;
+      width: auto;
+      padding: 0.45rem 1rem;
+      border-radius: 9999px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.3px;
+      text-align: center;
+      white-space: nowrap;
+      border-width: 1px;
+      border-style: solid;
+      transition: all 0.1s ease;
+      backdrop-filter: blur(2px);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
     }
     
-    body { 
-      background: linear-gradient(135deg, #0a0e27 0%, #13183a 100%);
-      color: var(--gamster-text);
+    /* A+ TIER - GOLD / YELLOW */
+    .tier-badge-A\+ {
+      background: #FFD700 !important;
+      color: #1a1a2e !important;
+      border-color: #FFA500 !important;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.4) !important;
     }
     
-    /* Glassmorphism Gamster Style */
-    .gamster-card {
-      background: rgba(19, 24, 58, 0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(0, 212, 255, 0.2);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 212, 255, 0.1) inset;
+    /* A TIER - BLUE */
+    .tier-badge-A {
+      background: #2563eb !important;
+      color: white !important;
+      border-color: #60a5fa !important;
     }
     
-    /* Tier-specific glows */
-    .tier-A-glow { 
-      box-shadow: 0 0 30px rgba(0, 255, 136, 0.4), 0 0 60px rgba(0, 255, 136, 0.15);
-      border-left: 4px solid #00ff88 !important;
-    }
-    .tier-B-glow { 
-      box-shadow: 0 0 30px rgba(0, 212, 255, 0.4), 0 0 60px rgba(0, 212, 255, 0.15);
-      border-left: 4px solid #00d4ff !important;
-    }
-    .tier-C-glow { 
-      box-shadow: 0 0 30px rgba(255, 204, 0, 0.4), 0 0 60px rgba(255, 204, 0, 0.15);
-      border-left: 4px solid #ffcc00 !important;
-    }
-    .tier-D-glow { 
-      box-shadow: 0 0 30px rgba(255, 51, 102, 0.4), 0 0 60px rgba(255, 51, 102, 0.15);
-      border-left: 4px solid #ff3366 !important;
+    /* A- TIER - DARK BLUE */
+    .tier-badge-A- {
+      background: #1e3a8a !important;
+      color: #dbeafe !important;
+      border-color: #3b82f6 !important;
     }
     
-    .tier-badge-A { background: rgba(0, 255, 136, 0.12); color: #00ff88; border: 1px solid #00ff8840; }
-    .tier-badge-B { background: rgba(0, 212, 255, 0.12); color: #00d4ff; border: 1px solid #00d4ff40; }
-    .tier-badge-C { background: rgba(255, 204, 0, 0.12); color: #ffcc00; border: 1px solid #ffcc0040; }
-    .tier-badge-D { background: rgba(255, 51, 102, 0.12); color: #ff3366; border: 1px solid #ff336640; }
-    
-    /* Animations */
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* B+ TIER - AMBER/GOLD */
+    .tier-badge-B\+ {
+      background: #fbbf24 !important;
+      color: #1e1b2e !important;
+      border-color: #fcd34d !important;
     }
     
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
-      50% { box-shadow: 0 0 40px rgba(0, 212, 255, 0.6); }
+    /* B TIER - ORANGE */
+    .tier-badge-B {
+      background: #f97316 !important;
+      color: white !important;
+      border-color: #fb923c !important;
+      box-shadow: 0 0 8px rgba(249, 115, 22, 0.3) !important;
     }
     
-    @keyframes shine {
-      0% { background-position: -200% center; }
-      100% { background-position: 200% center; }
+    /* B- TIER - DARK ORANGE */
+    .tier-badge-B- {
+      background: #ea580c !important;
+      color: #ffedd5 !important;
+      border-color: #f97316 !important;
     }
     
-    .animate-slide-up { animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-    .animate-pulse-glow { animation: pulseGlow 2s infinite; }
-    
-    .shine-effect {
-      background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
-      background-size: 200% 100%;
-      animation: shine 3s infinite;
+    /* C+ TIER - HOT PINK */
+    .tier-badge-C\+ {
+      background: #ec4899 !important;
+      color: white !important;
+      border-color: #f472b6 !important;
+      box-shadow: 0 0 8px rgba(236, 72, 153, 0.3) !important;
     }
     
-    /* Sticky Header */
-    .sticky-header th {
-      position: sticky;
-      top: 0;
-      background: #13183a;
-      backdrop-filter: blur(10px);
-      z-index: 10;
-      border-bottom: 2px solid #00d4ff40;
+    /* C TIER - PURPLE */
+    .tier-badge-C {
+      background: #6d28d9 !important;
+      color: #ede9fe !important;
+      border-color: #8b5cf6 !important;
     }
     
-    /* Hover Effects */
-    .hover-lift {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .hover-lift:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 212, 255, 0.2);
+    /* C- TIER - DARK PURPLE */
+    .tier-badge-C- {
+      background: #4c1d95 !important;
+      color: #e9d5ff !important;
+      border-color: #6d28d9 !important;
     }
     
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: #0c1030; }
-    ::-webkit-scrollbar-thumb { background: #00d4ff; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #00b0d4; }
-    
-    /* Rank Badges */
-    .rank-1 { background: linear-gradient(135deg, #FFD700, #FFA500); }
-    .rank-2 { background: linear-gradient(135deg, #C0C0C0, #A8A8A8); }
-    .rank-3 { background: linear-gradient(135deg, #CD7F32, #B87333); }
-    
-    /* Back to Top Button */
-    .back-to-top {
-      background: linear-gradient(135deg, #00d4ff, #7b2ff7);
-      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.5);
-      transition: all 0.3s;
+    /* D TIER - RED */
+    .tier-badge-D {
+      background: #b91c1c !important;
+      color: white !important;
+      border-color: #ef4444 !important;
     }
-    .back-to-top:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 30px rgba(0, 212, 255, 0.8);
+    
+    /* ===== TOP 3 PLAYER IMAGES - BIG SQUARE BOXES ===== */
+    .top-player-skin {
+      width: 140px !important;
+      height: 140px !important;
+      border-radius: 20px !important;
+      object-fit: cover !important;
+      border: 4px solid #3b82f6 !important;
+      box-shadow: 0 0 25px rgba(59, 130, 246, 0.6) !important;
+      background: linear-gradient(145deg, #1e2b4e, #0f172a) !important;
+      margin: 0 auto 15px auto !important;
+      transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+      display: block !important;
     }
-
-    /* Rank number styling */
-    .rank-number {
-      background: linear-gradient(135deg, #00d4ff20, #7b2ff720);
-      border: 1px solid #00d4ff40;
-      border-radius: 8px;
-      padding: 4px 12px;
-      font-weight: 700;
+    .top-player-skin:hover {
+      transform: scale(1.03) !important;
+      box-shadow: 0 0 35px rgba(59, 130, 246, 0.8) !important;
+      border-color: #60a5fa !important;
+    }
+    
+    /* Fallback for top players */
+    .top-player-skin-fallback {
+      width: 140px !important;
+      height: 140px !important;
+      border-radius: 20px !important;
+      background: linear-gradient(145deg, #1e2b4e, #0f172a) !important;
+      border: 4px solid #3b82f6 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin: 0 auto 15px auto !important;
+      font-size: 4rem !important;
+      color: #60a5fa !important;
+    }
+    
+    /* Regular player skin for table (smaller, circular) */
+    .player-skin {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #3b82f6;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+      background: linear-gradient(145deg, #1e2b4e, #0f172a);
+      margin: 0 auto 12px auto;
+      transition: transform 0.2s ease;
+    }
+    
+    td .tier-badge-base, .top-card .tier-badge-base { width: auto; min-width: 88px; }
+    
+    @keyframes slideUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-slide-up { animation: slideUp 0.5s cubic-bezier(0.2, 0.9, 0.3, 1) forwards; }
+    .sticky-header th { position: sticky; top: 0; background: var(--bg-elevated); z-index: 10; border-bottom: 1px solid var(--border-subtle); font-weight: 700; }
+    .filter-btn { background: transparent; color: #9aa9c2; border: 1px solid transparent; transition: all 0.2s ease; font-weight: 600; border-radius: 14px; cursor: pointer; }
+    .filter-btn.active { background: #3b82f6 !important; color: white !important; border-color: #3b82f6 !important; box-shadow: 0 6px 14px -4px #3b82f6; }
+    .filter-btn:hover:not(.active) { background: #161e2c; color: white; border-color: #3b82f6; }
+    input { background: #0f172a; border: 1px solid #2a3a55; color: white; border-radius: 18px; }
+    input:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 0 2px #1e3a8a40; }
+    .top-card { background: linear-gradient(145deg, #121a27, #0e1420); border: 1px solid #253041; border-radius: 32px; transition: all 0.25s ease; }
+    .top-card:hover { border-color: #3b82f6; transform: translateY(-5px); }
+    .rank-number { background: #121e30; border: 1px solid #2e405b; border-radius: 40px; padding: 4px 16px; font-weight: 800; font-size: 0.85rem; }
+    .screenshot-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1e293b; backdrop-filter: blur(20px); background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid #3b82f6; border-radius: 60px; padding: 14px 28px; display: flex; align-items: center; gap: 12px; box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(59,130,246,0.3); z-index: 2100; font-weight: 600; font-size: 0.95rem; color: white; opacity: 0; transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1); pointer-events: none; }
+    .screenshot-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .certificate-modal { position: fixed; inset: 0; background: rgba(5, 8, 14, 0.98); backdrop-filter: blur(16px); z-index: 1000; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 1.5rem; padding: 1rem; }
+    .certificate-modal.active { display: flex; animation: fadeIn 0.25s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .certificate-card { width: 620px; max-width: 92vw; background: #0c0f16; border-radius: 48px; padding: 2rem 1.8rem; position: relative; overflow: hidden; border: 1px solid rgba(59, 130, 246, 0.5); box-shadow: 0 35px 55px -15px rgba(0,0,0,0.8); margin: 0 auto; backface-visibility: hidden; transform: translateZ(0); }
+    .certificate-card::before { content: "◆ GUC OFFICIAL ◆"; position: absolute; bottom: 35px; right: -20px; font-size: 58px; font-weight: 900; color: rgba(59, 130, 246, 0.06); transform: rotate(-18deg); pointer-events: none; white-space: nowrap; font-family: monospace; }
+    .certificate-card::after { content: "VERIFIED"; position: absolute; top: 18%; left: -25px; font-size: 70px; font-weight: 900; color: rgba(59, 165, 93, 0.03); transform: rotate(10deg); pointer-events: none; }
+    .cert-player-name { font-size: 3rem; font-weight: 800; color: #FFFFFF; margin: 0.5rem 0 0.2rem; text-align: center; word-break: break-word; }
+    .cert-tier { display: inline-block; background: linear-gradient(145deg, #202433, #0e111a); padding: 0.7rem 2rem; border-radius: 80px; font-size: 1.7rem; font-weight: 800; letter-spacing: 1px; color: #ffdf7e; border: 1px solid rgba(255, 200, 100, 0.7); margin: 1rem 0; }
+    .cert-rank { background: #1a1f2c; display: inline-block; padding: 0.4rem 1.6rem; border-radius: 60px; color: #e2e8f0; font-weight: 700; font-size: 1rem; }
+    .cert-tested { text-align: center; color: #9aaec9; font-size: 0.875rem; margin-top: 1rem; }
+    .cert-footer-text { text-align: center; color: #5f6e8a; font-size: 11px; margin-top: 12px; padding-top: 8px; border-top: 1px dashed #2a3448; }
+    .cert-meta-row { display: flex; justify-content: space-between; font-size: 0.65rem; color: #5b6b8c; margin-top: 12px; flex-wrap: wrap; gap: 8px; }
+    .cert-action-btn { background: #252b39; border: none; padding: 0.75rem 1.5rem; border-radius: 60px; font-weight: 600; color: white; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 10px; font-size: 0.9rem; }
+    .cert-action-btn.screenshot-btn { background: #3b82f6; }
+    .cert-action-btn.close-cert { background: #2d1f2a; border: 1px solid #f87171; color: #fecaca; }
+    .back-to-top { background: #1a2538; border: 1px solid #3b82f6; width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+    .back-to-top:hover { background: #2d3a52; transform: scale(1.05); }
+    tr { transition: background 0.15s; cursor: pointer; }
+    tr:hover { background: #1a2538 !important; }
+    .guc-nav { background: rgba(7, 11, 20, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(59, 130, 246, 0.25); }
+    @media (max-width: 640px) {
+      .certificate-card { padding: 1.5rem 1.2rem; }
+      .cert-player-name { font-size: 2rem; }
+      .cert-tier { font-size: 1.2rem; padding: 0.5rem 1.2rem; }
+      .tier-badge-base { min-width: 80px; font-size: 0.75rem; padding: 0.35rem 0.75rem; }
+      .top-player-skin { width: 100px !important; height: 100px !important; border-radius: 16px !important; }
+      .top-player-skin-fallback { width: 100px !important; height: 100px !important; font-size: 3rem !important; }
     }
   </style>
 </head>
-<body class="antialiased">
-
-<div class="min-h-screen relative">
-  <!-- Animated Background Grid -->
-  <div class="fixed inset-0 opacity-5 pointer-events-none">
-    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, #00d4ff 1px, transparent 1px); background-size: 50px 50px;"></div>
-  </div>
-  
-  <!-- Back to Top Button -->
-  <button id="backToTop" class="back-to-top fixed bottom-8 right-8 z-50 p-4 rounded-full text-white opacity-0 invisible transition-all duration-300">
-    <i class="fas fa-arrow-up text-xl"></i>
-  </button>
-
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
-    
-<!-- HEADER SECTION - Gamster Style with Logo -->
-<div class="gamster-card rounded-3xl p-6 sm:p-8 mb-8 animate-slide-up">
-  <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-    <div class="flex items-center gap-4">
-      <!-- LOGO - Your GUC Logo -->
-      <div class="w-16 h-16 rounded-2xl flex items-center justify-center shadow-xl relative overflow-hidden">
-        <img src="/Sleek _GUC_ logo with colorful swoosh.png" alt="GUC Logo" class="w-full h-full object-cover rounded-2xl">
+<body>
+  <div class="guc-nav fixed top-0 left-0 w-full z-50 py-3 px-5 shadow-lg">
+    <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-3">
+      <div class="flex items-center gap-3">
+        <img src="/assets/gamster8years.webp" alt="Logo" class="w-9 h-9 rounded-xl border border-[#3b82f6]/70 object-cover bg-gradient-to-br from-[#1e3a8a] to-[#0f172a] shadow-md">
+        <div class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent">GAMSTER<span class="text-blue-400">TIER</span></div>
+        <div class="hidden sm:flex text-xs bg-[#1e2b4e] px-3 py-1.5 rounded-full text-blue-200 border border-[#3b82f6]/50"><i class="fas fa-shield-alt mr-1"></i> GUC · OFFICIAL</div>
       </div>
-      <div>
-        <div class="flex items-center gap-3 flex-wrap">
-          <h1 class="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-[#00d4ff] to-[#7b2ff7] bg-clip-text text-transparent">
-            Gamster Tier Tests
+      <div class="flex gap-3 text-sm">
+        <div class="bg-[#0f172a]/80 px-4 py-1.5 rounded-full backdrop-blur-sm border border-[#2e405b]">
+          <i class="fas fa-trophy text-yellow-500 mr-2"></i><span id="totalPlayersNav">0</span> Tested
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12 relative z-10">
+    <div class="gamster-card rounded-3xl p-6 sm:p-8 mb-8 animate-slide-up">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
+        <div>
+          <h1 class="text-3xl sm:text-4xl font-black tracking-tight text-white flex items-center gap-3">
+            <img src="/assets/Sleek _GUC_ logo with colorful swoosh.png" alt="Logo" class="w-10 h-10 rounded-xl border border-[#3b82f6]/60 object-cover">
+            <span>Tier Tests <span class="text-blue-400">Leaderboard</span></span>
           </h1>
-          <span class="px-3 py-1 bg-[#ff336620] text-[#ff3366] rounded-full text-xs font-bold border border-[#ff336640]">
-            <i class="fas fa-trophy mr-1"></i>GUC
-          </span>
+          <p class="text-[#9aaec9] mt-2"><i class="fas fa-chart-line text-blue-500 mr-2"></i> Global ranking · Color Coded Tier System</p>
         </div>
-        <p class="text-[#8890b5] mt-1 flex items-center gap-2">
-          <i class="fas fa-chart-line text-[#00ff88]"></i>
-          <span>Leaderboard updates automatically · GUC Community</span>
-        </p>
-      </div>
-    </div>
-    <div class="flex gap-3">
-      <div class="bg-[#13183a] px-4 py-2 rounded-xl border border-[#00d4ff40]">
-        <i class="fas fa-users text-[#00d4ff] mr-2"></i>
-        <span class="font-semibold" id="totalPlayers">6 Players</span>
-      </div>
-    </div>
-  </div>
-</div>
-    <!-- SEARCH & FILTER BAR -->
-    <div class="flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between mb-8">
-      <div class="relative w-full md:w-96">
-        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-[#8890b5]"></i>
-        <input type="text" id="searchInput" placeholder="Search by IGN..." 
-               class="w-full bg-[#0c1030] border border-[#00d4ff40] rounded-xl py-3.5 px-12 text-white placeholder-[#8890b5] focus:outline-none focus:border-[#00d4ff] focus:ring-2 focus:ring-[#00d4ff40] transition-all">
-        <button id="clearSearch" class="absolute right-4 top-1/2 -translate-y-1/2 text-[#8890b5] hover:text-white hidden">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      
-      <div class="flex flex-wrap gap-2">
-        <div class="flex bg-[#0c1030] p-1.5 rounded-xl border border-[#00d4ff40]">
-          <button data-filter="all" class="filter-btn px-5 py-2 rounded-lg text-sm font-semibold transition-all bg-gradient-to-r from-[#00d4ff] to-[#7b2ff7] text-white shadow-lg">
-            <i class="fas fa-list mr-1"></i>All
-          </button>
-          <button data-filter="A" class="filter-btn px-5 py-2 rounded-lg text-sm font-semibold transition-all text-[#00ff88] hover:bg-[#00ff8820]">
-            <i class="fas fa-crown mr-1"></i>A
-          </button>
-          <button data-filter="B" class="filter-btn px-5 py-2 rounded-lg text-sm font-semibold transition-all text-[#00d4ff] hover:bg-[#00d4ff20]">
-            <i class="fas fa-star mr-1"></i>B
-          </button>
-          <button data-filter="C" class="filter-btn px-5 py-2 rounded-lg text-sm font-semibold transition-all text-[#ffcc00] hover:bg-[#ffcc0020]">
-            <i class="fas fa-medal mr-1"></i>C
-          </button>
-          <button data-filter="D" class="filter-btn px-5 py-2 rounded-lg text-sm font-semibold transition-all text-[#ff3366] hover:bg-[#ff336620]">
-            <i class="fas fa-shield mr-1"></i>D
-          </button>
+        <div class="bg-[#0f1a2b] px-5 py-2.5 rounded-2xl border border-[#2e405b]">
+          <i class="fas fa-users text-[#3b82f6] mr-2"></i>
+          <span class="font-bold text-white" id="totalPlayers">0 Players</span>
         </div>
       </div>
     </div>
 
-    <!-- PLAYER CARD VIEW (Search Result) -->
+    <div class="flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between mb-9">
+      <div class="relative w-full md:w-96">
+        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-[#6b8cbe]"></i>
+        <input type="text" id="searchInput" placeholder="🔍 Search by IGN ..." class="w-full bg-[#0f172a] border border-[#2e405b] rounded-2xl py-3.5 px-12 text-white focus:border-[#3b82f6] transition-all">
+        <button id="clearSearch" class="absolute right-4 top-1/2 -translate-y-1/2 text-[#8ba3c9] hover:text-white hidden"><i class="fas fa-times-circle"></i></button>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <div class="flex bg-[#0f172a]/80 p-1.5 rounded-2xl border border-[#2a3a55]">
+          <button data-filter="all" class="filter-btn px-5 py-2 rounded-xl text-sm font-bold active">ALL</button>
+          <button data-filter="A" class="filter-btn px-5 py-2 rounded-xl text-sm font-bold">A</button>
+          <button data-filter="B" class="filter-btn px-5 py-2 rounded-xl text-sm font-bold">B</button>
+          <button data-filter="C" class="filter-btn px-5 py-2 rounded-xl text-sm font-bold">C</button>
+          <button data-filter="D" class="filter-btn px-5 py-2 rounded-xl text-sm font-bold">D</button>
+        </div>
+      </div>
+    </div>
+
     <div id="playerCardContainer" class="mb-8 hidden"></div>
 
-    <!-- TOP 3 PLAYERS SECTION -->
-    <div id="topPlayersSection" class="mb-10">
+    <div class="mb-12">
       <div class="flex items-center gap-3 mb-5">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FFD700] to-[#FFA500] flex items-center justify-center">
-          <i class="fas fa-trophy text-white"></i>
-        </div>
-        <h2 class="text-2xl font-bold text-white">Top Performers</h2>
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#1e2b4e] to-[#0f172a] flex items-center justify-center border border-[#3b82f6]"><i class="fas fa-medal text-[#fbbf24] text-xl"></i></div>
+        <h2 class="text-2xl font-extrabold text-white">🏆 Elite Performers</h2>
       </div>
-      <div id="topPlayersGrid" class="grid grid-cols-1 sm:grid-cols-3 gap-6"></div>
+      <div id="topPlayersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </div>
 
-    <!-- LEADERBOARD TABLE -->
-    <div class="gamster-card rounded-3xl overflow-hidden border border-[#00d4ff40]">
+    <div class="gamster-card rounded-3xl overflow-hidden">
       <div class="overflow-x-auto">
-        <table class="w-full text-left" id="leaderboardTable">
-          <thead class="sticky-header text-xs sm:text-sm uppercase tracking-wider text-[#8890b5]">
-            <tr>
-              <th class="p-5 cursor-pointer hover:text-white transition" data-sort="rank">
-                <i class="fas fa-hashtag mr-2"></i>RANK <i class="fas fa-sort ml-1 text-xs"></i>
-              </th>
-              <th class="p-5 cursor-pointer hover:text-white transition" data-sort="ign">
-                <i class="fas fa-gamepad mr-2"></i>IGN <i class="fas fa-sort ml-1 text-xs"></i>
-              </th>
-              <th class="p-5 cursor-pointer hover:text-white transition" data-sort="tester">
-                <i class="fas fa-user-check mr-2"></i>TIER TESTER <i class="fas fa-sort ml-1 text-xs"></i>
-              </th>
-              <th class="p-5 cursor-pointer hover:text-white transition" data-sort="tier">
-                <i class="fas fa-chart-simple mr-2"></i>TIER <i class="fas fa-sort ml-1 text-xs"></i>
-              </th>
-              <th class="p-5 text-center">
-                <i class="fas fa-share-nodes"></i>
-              </th>
-            </tr>
+        <table class="w-full text-left min-w-[600px]">
+          <thead class="sticky-header text-xs sm:text-sm uppercase text-[#bfd6ff]">
+            <tr><th class="p-5 cursor-pointer hover:text-[#3b82f6] transition" data-sort="rank">RANK</th><th class="p-5 cursor-pointer hover:text-[#3b82f6] transition" data-sort="ign">IGN</th><th class="p-5 cursor-pointer hover:text-[#3b82f6] transition" data-sort="tester">TESTER</th><th class="p-5 cursor-pointer hover:text-[#3b82f6] transition" data-sort="tier">TIER</th><th class="p-5 text-center">CERT</th></tr>
           </thead>
-          <tbody id="tableBody" class="divide-y divide-[#00d4ff10]"></tbody>
+          <tbody id="tableBody" class="divide-y divide-[#253449]"></tbody>
         </table>
       </div>
-      <div class="p-5 border-t border-[#00d4ff20] flex justify-between items-center">
-        <span id="paginationInfo" class="text-sm text-[#8890b5]"></span>
-        <button id="showMoreBtn" class="bg-[#0c1030] hover:bg-[#13183a] text-[#00d4ff] px-4 py-2 rounded-lg text-sm font-semibold transition border border-[#00d4ff40] hidden">
-          <i class="fas fa-chevron-down mr-2"></i>Show More
-        </button>
+      <div class="p-5 border-t border-[#253449] flex justify-between items-center bg-[#0f172a]/40 flex-wrap gap-3">
+        <span id="paginationInfo" class="text-sm text-[#9aaec9] font-medium"></span>
+        <button id="showMoreBtn" class="bg-[#1e2b4e] hover:bg-[#2d3f64] text-white px-6 py-2 rounded-xl text-sm font-semibold transition hidden">Show More ↓</button>
       </div>
     </div>
-    
-    <!-- Footer -->
-    <div class="mt-8 text-center text-[#8890b5] text-sm">
-      <p>© 2026 Gamster Tier Tests · GUC Community · All rights reserved | Actionbtww</p>
-    </div>
+    <div class="mt-10 text-center text-[#6f8aae] text-xs font-mono border-t border-[#1f2a3a] pt-6"><p> Gamster Tier Tests · GUC Community · Click certificate to view</p></div>
   </main>
+  <button id="backToTop" class="back-to-top fixed bottom-6 right-6 z-50 opacity-0 invisible transition-all duration-200"><i class="fas fa-arrow-up text-white text-sm"></i></button>
   
-  <!-- SHARE MODAL -->
-  <div id="shareModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden transition-all">
-    <div class="gamster-card p-8 rounded-3xl max-w-md w-full mx-4 border border-[#00d4ff]">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-2xl font-bold text-white">
-          <i class="fas fa-share-alt text-[#00d4ff] mr-2"></i>Share Result
-        </h3>
-        <button id="closeShareModal" class="text-[#8890b5] hover:text-white transition">
-          <i class="fas fa-times text-xl"></i>
-        </button>
-      </div>
-      <p id="shareText" class="bg-[#0c1030] p-4 rounded-xl border border-[#00d4ff40] mb-4 text-white break-all"></p>
-      <div class="flex gap-3">
-        <button id="copyShareBtn" class="flex-1 bg-gradient-to-r from-[#00d4ff] to-[#7b2ff7] hover:from-[#00b0d4] hover:to-[#6a20e0] text-white py-3 rounded-xl font-semibold transition flex items-center justify-center gap-2">
-          <i class="fas fa-copy"></i>Copy
-        </button>
-        <button id="closeModalBtn" class="flex-1 bg-[#13183a] hover:bg-[#1a1f4a] text-white py-3 rounded-xl font-semibold transition">
-          Close
-        </button>
-      </div>
+  <div id="certificateModal" class="certificate-modal">
+    <div id="certificateContainer" style="display: flex; justify-content: center; width: 100%;"></div>
+    <div class="flex gap-3 justify-center flex-wrap px-2">
+      <button id="screenshotGuideBtn" class="cert-action-btn screenshot-btn"><i class="fas fa-camera"></i> 📸 Take Screenshot</button>
+      <button id="closeCertModal" class="cert-action-btn close-cert"><i class="fas fa-times"></i> CLOSE</button>
     </div>
   </div>
-</div>
 
 <script>
-  (function(){
-    "use strict";
-
-    // ═══════════════════════════════════════════════════════════
-    // 📊 PLAYER DATA - EDIT THIS SECTION TO ADD/REMOVE PLAYERS
-    // ═══════════════════════════════════════════════════════════
-    const PLAYERS = [
-      { ign: "ZerotTick", tester: "432_", tier: "A" },
-      { ign: "raifonly", tester: "432", tier: "A" },
-      { ign: "Swmkf", tester: "432", tier: "A" },
-      { ign: "_ZestTapxD", tester: "432", tier: "B" },
-      { ign: "Zonqie", tester: "432", tier: "C" },
-      { ign: "dimonking", tester: "432_", tier: "D" },
-      // ADD MORE PLAYERS HERE ▼
-      // { ign: "NewPlayer", tester: "432", tier: "A" },
-    ];
-    
-    // 🔧 HOW TO ADD MORE PLAYERS:
-    // Simply add new objects to the PLAYERS array above:
-    // { ign: "PlayerName", tester: "432", tier: "A/B/C/D" }
-    // 
-    // For more than 10 players, the "Show More" button will appear!
-    // ═══════════════════════════════════════════════════════════
-
-    // DOM Elements
-    const searchInput = document.getElementById('searchInput');
-    const clearSearch = document.getElementById('clearSearch');
-    const playerCardContainer = document.getElementById('playerCardContainer');
-    const topPlayersGrid = document.getElementById('topPlayersGrid');
-    const tableBody = document.getElementById('tableBody');
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const paginationInfo = document.getElementById('paginationInfo');
-    const backToTop = document.getElementById('backToTop');
-    const shareModal = document.getElementById('shareModal');
-    const shareText = document.getElementById('shareText');
-    const closeShareModal = document.getElementById('closeShareModal');
-    const copyShareBtn = document.getElementById('copyShareBtn');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const totalPlayersSpan = document.getElementById('totalPlayers');
-    const showMoreBtn = document.getElementById('showMoreBtn');
-    
-    let currentFilter = 'all';
-    let currentSort = { field: 'rank', asc: true };
-    let searchTerm = '';
-    let displayLimit = 10; // Show only 10 initially
-
-    // Tier order mapping
-    const tierOrder = { 'A': 1, 'B': 2, 'C': 3, 'D': 4 };
-    
-    // Get tier-specific classes
-    function getTierClasses(tier) {
-      const baseTier = tier.charAt(0);
-      const glows = {
-        'A': 'tier-A-glow tier-badge-A',
-        'B': 'tier-B-glow tier-badge-B',
-        'C': 'tier-C-glow tier-badge-C',
-        'D': 'tier-D-glow tier-badge-D'
-      };
-      return glows[baseTier] || 'tier-D-glow tier-badge-D';
+(function(){
+  // ========== PLAYER DATA ==========
+  const PLAYERS = [
+    { ign: "ZerotTick", tester: "432_", tier: "A" }, { ign: "raifonly", tester: "432", tier: "A" }, { ign: "Swmkf", tester: "432", tier: "A" },
+    { ign: "_ZestTapxD", tester: "432", tier: "B" }, { ign: "Zonqie", tester: "432", tier: "C" }, { ign: "dimonking", tester: "432_", tier: "D" },
+    { ign: "raifgamingyt", tester: "Arzoz", tier: "A" }, { ign: "GojoCookie", tester: "Arzoz", tier: "C" }, { ign: "HelexMC", tester: "<1252671825855647909>", tier: "B" },
+    { ign: "Enitity__303", tester: "432_", tier: "C-" }, { ign: "ItzCold_YT", tester: "432_", tier: "A-" }, { ign: "Thewier", tester: "432_", tier: "A+" },
+    { ign: "L1CH", tester: "432_", tier: "A" }, { ign: "xAlexK3NG_", tester: "<1252671825855647909>", tier: "B" }, { ign: "IamNotDevilMC", tester: "432_", tier: "A+" },
+    { ign: "Catbrine", tester: "432", tier: "A+" }, { ign: "Enzoylovesoreo", tester: "432_", tier: "A" }, { ign: "Abhirup", tester: "KingJerusalem", tier: "C+" },
+    { ign: "_PixelWarriorYT_", tester: "<1252671825855647909>", tier: "B+" }, { ign: "Restarted", tester: "UkOnly", tier: "A-" }, { ign: "Browsing_", tester: "oth0098", tier: "B-" },
+    { ign: "__Azzz", tester: "432", tier: "C+" }, { ign: "KitsuneKraze", tester: "UkOnly", tier: "C-" }, { ign: "Myxi", tester: "UkOnly", tier: "A+" },
+    { ign: "aminepro123", tester: "oth0098", tier: "B+" }, { ign: "UkOnly", tester: "oth0098", tier: "B+" }, { ign: "Arzoz", tester: "oth0098", tier: "A" }
+  ];
+  
+  // tier ranking order
+  const tierRank = { 'A+':1, 'A':2, 'A-':3, 'B+':4, 'B':5, 'B-':6, 'C+':7, 'C':8, 'C-':9, 'D':10 };
+  
+  function getGlobalRanked() {
+    return [...PLAYERS].sort((a,b) => {
+      let rankA = tierRank[a.tier] !== undefined ? tierRank[a.tier] : 99;
+      let rankB = tierRank[b.tier] !== undefined ? tierRank[b.tier] : 99;
+      if(rankA !== rankB) return rankA - rankB;
+      return a.ign.localeCompare(b.ign);
+    });
+  }
+  function getPlayerRank(ign) { const ranked = getGlobalRanked(); const idx = ranked.findIndex(p => p.ign === ign); return idx !== -1 ? idx+1 : null; }
+  function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+  
+  function getTierBadge(tier) {
+    let badgeClass = '';
+    switch(tier) {
+      case 'A+': badgeClass = 'tier-badge-A\\+'; break;
+      case 'A': badgeClass = 'tier-badge-A'; break;
+      case 'A-': badgeClass = 'tier-badge-A-'; break;
+      case 'B+': badgeClass = 'tier-badge-B\\+'; break;
+      case 'B': badgeClass = 'tier-badge-B'; break;
+      case 'B-': badgeClass = 'tier-badge-B-'; break;
+      case 'C+': badgeClass = 'tier-badge-C\\+'; break;
+      case 'C': badgeClass = 'tier-badge-C'; break;
+      case 'C-': badgeClass = 'tier-badge-C-'; break;
+      case 'D': badgeClass = 'tier-badge-D'; break;
+      default: badgeClass = 'tier-badge-D';
     }
-
-    // Get tier badge HTML
-    function getTierBadge(tier) {
-      const baseTier = tier.charAt(0);
-      const colors = {
-        'A': 'bg-[#00ff8820] text-[#00ff88] border-[#00ff8840]',
-        'B': 'bg-[#00d4ff20] text-[#00d4ff] border-[#00d4ff40]',
-        'C': 'bg-[#ffcc0020] text-[#ffcc00] border-[#ffcc0040]',
-        'D': 'bg-[#ff336620] text-[#ff3366] border-[#ff336640]'
-      };
-      return `<span class="px-4 py-1.5 rounded-full text-sm font-bold border ${colors[baseTier] || colors['D']}">
-        <i class="fas fa-shield-halved mr-1"></i>${tier}
-      </span>`;
-    }
-
-    // Sort players
-    function sortPlayers(players) {
-      return [...players].sort((a, b) => {
-        if (currentSort.field === 'tier') {
-          const tierA = tierOrder[a.tier.charAt(0)] || 5;
-          const tierB = tierOrder[b.tier.charAt(0)] || 5;
-          return currentSort.asc ? tierA - tierB : tierB - tierA;
-        } else if (currentSort.field === 'ign') {
-          return currentSort.asc ? a.ign.localeCompare(b.ign) : b.ign.localeCompare(a.ign);
-        } else if (currentSort.field === 'tester') {
-          return currentSort.asc ? a.tester.localeCompare(b.tester) : b.tester.localeCompare(a.tester);
-        } else if (currentSort.field === 'rank') {
-          // Rank is determined by tier first, then IGN
-          const tierA = tierOrder[a.tier.charAt(0)] || 5;
-          const tierB = tierOrder[b.tier.charAt(0)] || 5;
-          if (tierA !== tierB) return currentSort.asc ? tierA - tierB : tierB - tierA;
-          return currentSort.asc ? a.ign.localeCompare(b.ign) : b.ign.localeCompare(a.ign);
-        }
-        return 0;
-      });
-    }
-
-    // Filter and sort
-    function filterAndSort() {
-      let filtered = PLAYERS.filter(p => {
-        const matchTier = currentFilter === 'all' || p.tier.charAt(0) === currentFilter;
-        const matchSearch = p.ign.toLowerCase().includes(searchTerm.toLowerCase());
-        return matchTier && matchSearch;
-      });
-      return sortPlayers(filtered);
-    }
-
-    // Get top 3 players
-    function getTop3() {
-      const sorted = [...PLAYERS].sort((a, b) => {
-        const tierDiff = (tierOrder[a.tier.charAt(0)] || 5) - (tierOrder[b.tier.charAt(0)] || 5);
-        if (tierDiff !== 0) return tierDiff;
-        return a.ign.localeCompare(b.ign);
-      });
-      return sorted.slice(0, 3);
-    }
-
-    // Render top 3 players
-    function renderTopPlayers() {
-      const top3 = getTop3();
-      const medals = ['🥇', '🥈', '🥉'];
-      const rankClasses = ['rank-1', 'rank-2', 'rank-3'];
-      
-      topPlayersGrid.innerHTML = top3.map((p, idx) => {
-        const tierClass = getTierClasses(p.tier);
-        return `
-          <div class="gamster-card p-6 rounded-2xl ${tierClass} hover-lift cursor-pointer animate-slide-up" style="animation-delay: ${idx * 0.1}s">
-            <div class="flex items-start justify-between mb-3">
-              <span class="text-3xl">${medals[idx]}</span>
-              <span class="w-10 h-10 rounded-full ${rankClasses[idx]} flex items-center justify-center text-white font-bold text-sm">
-                #${idx + 1}
-              </span>
-            </div>
-            <div class="text-2xl font-bold text-white mb-2">${p.ign}</div>
-            <div class="mb-2">${getTierBadge(p.tier)}</div>
-            <div class="text-sm text-[#8890b5] mb-4">
-              <i class="fas fa-user mr-1"></i>Tester: ${p.tester}
-            </div>
-            <button data-ign="${p.ign}" data-tier="${p.tier}" class="share-trigger w-full bg-[#13183a] hover:bg-[#1a1f4a] text-white py-2 rounded-lg text-sm transition flex items-center justify-center gap-2">
-              <i class="fas fa-share"></i>Share Result
-            </button>
-          </div>
-        `;
-      }).join('');
-    }
-
-    // Render player card (search result)
-    function renderPlayerCard(player) {
-      if (!player) {
-        playerCardContainer.innerHTML = `
-          <div class="gamster-card p-8 rounded-3xl text-center border border-[#ff336640]">
-            <i class="fas fa-search text-5xl text-[#8890b5] mb-4"></i>
-            <h3 class="text-xl font-semibold text-white mb-2">No player found</h3>
-            <p class="text-[#8890b5]">Try searching with a different IGN</p>
-          </div>
-        `;
-        playerCardContainer.classList.remove('hidden');
-        return;
-      }
-      
-      const tierClass = getTierClasses(player.tier);
-      playerCardContainer.innerHTML = `
-        <div class="gamster-card p-8 rounded-3xl ${tierClass} animate-slide-up">
-          <div class="flex flex-col items-center text-center">
-            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-[#00d4ff] to-[#7b2ff7] flex items-center justify-center mb-4 shadow-xl">
-              <i class="fas fa-user text-3xl text-white"></i>
-            </div>
-            <h2 class="text-4xl font-bold text-white mb-3">${player.ign}</h2>
-            <div class="mb-4">${getTierBadge(player.tier)}</div>
-            <div class="text-lg text-[#e8e9f3] mb-6">
-              <i class="fas fa-user-check mr-2 text-[#00d4ff]"></i>Tester: ${player.tester}
-            </div>
-            <div class="flex gap-3 w-full">
-              <button data-ign="${player.ign}" data-tier="${player.tier}" class="copy-trigger flex-1 bg-[#13183a] hover:bg-[#1a1f4a] text-white py-3 rounded-xl font-semibold transition flex items-center justify-center gap-2">
-                <i class="fas fa-copy"></i>Copy
-              </button>
-              <button data-ign="${player.ign}" data-tier="${player.tier}" class="share-trigger flex-1 bg-gradient-to-r from-[#00d4ff] to-[#7b2ff7] hover:from-[#00b0d4] hover:to-[#6a20e0] text-white py-3 rounded-xl font-semibold transition flex items-center justify-center gap-2">
-                <i class="fas fa-share"></i>Share
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-      playerCardContainer.classList.remove('hidden');
-    }
-
-    // Render table with pagination
-    function renderTable(players) {
-      if (players.length === 0) {
-        tableBody.innerHTML = `
-          <tr>
-            <td colspan="5" class="p-10 text-center">
-              <i class="fas fa-inbox text-5xl text-[#8890b5] mb-3"></i>
-              <p class="text-[#8890b5] text-lg">No players found</p>
-            </td>
-          </tr>
-        `;
-        paginationInfo.innerText = `0 players`;
-        showMoreBtn.classList.add('hidden');
-        return;
-      }
-      
-      const displayPlayers = players.slice(0, displayLimit);
-      const hasMore = players.length > displayLimit;
-      
-      let html = '';
-      displayPlayers.forEach((p, index) => {
-        const tierClass = getTierClasses(p.tier);
-        const globalRank = players.indexOf(p) + 1;
-        
-        html += `
-          <tr class="hover:bg-[#00d4ff10] transition-all duration-200" style="animation: slideUp 0.4s ease ${index * 0.05}s both">
-            <td class="p-5">
-              <span class="rank-number text-[#00d4ff]">#${globalRank}</span>
-            </td>
-            <td class="p-5">
-              <div class="flex items-center gap-3">
-                <i class="fas fa-gamepad text-[#00d4ff]"></i>
-                <span class="font-bold text-white text-lg">${p.ign}</span>
-              </div>
-            </td>
-            <td class="p-5 text-[#e8e9f3]">
-              <i class="fas fa-user mr-2 text-[#8890b5]"></i>${p.tester}
-            </td>
-            <td class="p-5">${getTierBadge(p.tier)}</td>
-            <td class="p-5 text-center">
-              <button data-ign="${p.ign}" data-tier="${p.tier}" class="share-trigger text-[#00d4ff] hover:text-white transition">
-                <i class="fas fa-share-alt text-xl"></i>
-              </button>
-            </td>
-          </tr>
-        `;
-      });
-      
-      tableBody.innerHTML = html;
-      paginationInfo.innerText = `Showing ${displayPlayers.length} of ${players.length} player${players.length !== 1 ? 's' : ''}`;
-      
-      // Show/hide "Show More" button
-      if (hasMore && searchTerm === '') {
-        showMoreBtn.classList.remove('hidden');
-      } else {
-        showMoreBtn.classList.add('hidden');
-      }
-    }
-
-    // Update UI
-    function updateUI() {
-      const filtered = filterAndSort();
-      
-      // Update total players
-      totalPlayersSpan.innerHTML = `<i class="fas fa-users mr-2"></i>${PLAYERS.length} Players`;
-      
-      // Show/hide clear search button
-      if (searchTerm) {
-        clearSearch.classList.remove('hidden');
-        const exactMatch = PLAYERS.find(p => p.ign.toLowerCase() === searchTerm.toLowerCase()) || filtered[0] || null;
-        renderPlayerCard(exactMatch);
-      } else {
-        clearSearch.classList.add('hidden');
-        playerCardContainer.classList.add('hidden');
-      }
-      
-      renderTable(filtered);
-      renderTopPlayers();
-    }
-
-    // Event Listeners
-    searchInput.addEventListener('input', (e) => {
-      searchTerm = e.target.value;
-      displayLimit = 10; // Reset limit on search
-      updateUI();
+    return `<span class="tier-badge-base ${badgeClass}">TIER ${tier}</span>`;
+  }
+  
+  // BIG SQUARE IMAGE FOR TOP 3 PLAYERS
+  function getTopPlayerSkinImage(ign) {
+    const skins = { "Catbrine": "/skins/catbrine.png", "IamNotDevilMC": "/skins/devil.png", "Myxi": "/skins/oo.png" };
+    const skinPath = skins[ign] || `/skins/default.png`;
+    return `<img src="${skinPath}" alt="${ign}" class="top-player-skin" onerror="this.onerror=null; this.src='/skins/default.png';">`;
+  }
+  
+  // Normal circular image for table (keeping original)
+  function getPlayerSkinImage(ign) {
+    const skins = { "Catbrine": "/skins/catbrine.png", "IamNotDevilMC": "/skins/devil.png", "Myxi": "/skins/oo.png" };
+    const skinPath = skins[ign] || `/skins/default.png`;
+    return `<img src="${skinPath}" alt="${ign}" class="player-skin" onerror="this.onerror=null; this.src='/skins/default.png';">`;
+  }
+  
+  function generateCertId(ign) { const rand = Math.random().toString(36).substring(2,8).toUpperCase(); const time = Date.now().toString(36).slice(-4); return `GUC-${ign.substring(0,3).toUpperCase()}-${rand}${time}`; }
+  function getTimestamp() { const now = new Date(); return now.toLocaleString('en-US', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit' }); }
+  
+  function showScreenshotToast() {
+    const existingToast = document.querySelector('.screenshot-toast');
+    if(existingToast) existingToast.remove();
+    const toast = document.createElement('div');
+    toast.className = 'screenshot-toast';
+    toast.innerHTML = `<i class="fas fa-camera-retro"></i><span>📸 Screenshot manually (PrtSc / mobile screenshot)</span><i class="fas fa-mobile-alt text-blue-300"></i>`;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 10);
+    setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 300); }, 3000);
+  }
+  
+  function buildCertificateHTML(player, rank, certId, ts) {
+    return `<div class="certificate-card" id="certificateInner">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem;"><div style="background: #1a1f2e; padding: 6px 16px; border-radius: 999px; font-size: 11px; font-weight: 700;"><i class="fas fa-gamepad" style="margin-right: 4px; color: #60a5fa;"></i> GUC | COMPETITIVE</div><div style="background: rgba(59,165,93,0.12); border: 1px solid #3ba55d; border-radius: 999px; padding: 6px 12px; font-size: 11px; font-weight: 700; color: #6fcf97;"><i class="fas fa-check-circle"></i> VERIFIED OFFICIAL</div></div>
+      <div class="cert-player-name">${escapeHtml(player.ign)}</div>
+      <div style="text-align: center; margin: 8px 0;"><div class="cert-tier">🏅 TIER ${escapeHtml(player.tier)}</div></div>
+      <div style="text-align: center; margin-top: 4px;"><span class="cert-rank"><i class="fas fa-hashtag"></i> GLOBAL RANK #${rank}</span></div>
+      <div class="cert-tested">📋 Tested by ${escapeHtml(player.tester)} • Official GUC System</div>
+      <div class="cert-footer-text">Official Tier Test Certificate – Gamster Tier Tests</div>
+      <div class="cert-meta-row"><span>🆔 ID: ${certId}</span><span>📅 ${ts}</span></div>
+      <div class="cert-watermark-text">🔒 VERIFIED • GUC • ${certId.slice(-8)}</div>
+    </div>`;
+  }
+  
+  function showCertificateModal(player) {
+    const rank = getPlayerRank(player.ign);
+    if(!rank) return;
+    const certId = generateCertId(player.ign);
+    const ts = getTimestamp();
+    document.getElementById('certificateContainer').innerHTML = buildCertificateHTML(player, rank, certId, ts);
+    document.getElementById('certificateModal').classList.add('active');
+  }
+  
+  document.getElementById('screenshotGuideBtn').addEventListener('click', showScreenshotToast);
+  document.getElementById('closeCertModal').addEventListener('click',()=> document.getElementById('certificateModal').classList.remove('active'));
+  document.getElementById('certificateModal').addEventListener('click',(e)=>{ if(e.target === document.getElementById('certificateModal')) document.getElementById('certificateModal').classList.remove('active'); });
+  
+  let currentFilter = 'all';
+  let currentSort = { field: 'rank', asc: true };
+  let searchTerm = '';
+  let displayLimit = 10;
+  
+  function filterAndSortPlayers() {
+    let filtered = PLAYERS.filter(p => (currentFilter === 'all' || p.tier === currentFilter) && p.ign.toLowerCase().includes(searchTerm.toLowerCase()));
+    return [...filtered].sort((a,b) => {
+      if(currentSort.field === 'tier') { let val = (tierRank[a.tier]||99) - (tierRank[b.tier]||99); return currentSort.asc ? val : -val; }
+      if(currentSort.field === 'ign') return currentSort.asc ? a.ign.localeCompare(b.ign) : b.ign.localeCompare(a.ign);
+      if(currentSort.field === 'tester') return currentSort.asc ? a.tester.localeCompare(b.tester) : b.tester.localeCompare(a.tester);
+      const rankA = getPlayerRank(a.ign), rankB = getPlayerRank(b.ign);
+      return currentSort.asc ? rankA - rankB : rankB - rankA;
     });
-
-    clearSearch.addEventListener('click', () => {
-      searchInput.value = '';
-      searchTerm = '';
-      displayLimit = 10;
-      updateUI();
+  }
+  
+  function renderTop() {
+    const top3 = getGlobalRanked().slice(0,3);
+    const medals = ['🥇','🥈','🥉'];
+    document.getElementById('topPlayersGrid').innerHTML = top3.map((p,i)=>`
+      <div class="top-card p-5 animate-slide-up cursor-pointer" style="animation-delay:${i*0.08}s">
+        <div class="flex justify-between items-start"><span class="text-3xl">${medals[i]}</span><span class="w-10 h-10 rounded-full flex items-center justify-center font-extrabold bg-[#1e2a3a]">#${i+1}</span></div>
+        <!-- BIG SQUARE IMAGE FOR TOP PLAYERS -->
+        <div style="display:flex; justify-content:center; margin: 10px 0;">${getTopPlayerSkinImage(p.ign)}</div>
+        <div class="text-2xl font-black text-white mt-2 text-center">${escapeHtml(p.ign)}</div>
+        <div class="my-3 text-center">${getTierBadge(p.tier)}</div>
+        <div class="text-sm text-[#b8c7f0] text-center"><i class="fas fa-id-card mr-1 text-blue-400"></i>${escapeHtml(p.tester)}</div>
+        <button data-ign="${escapeHtml(p.ign)}" data-tier="${p.tier}" data-tester="${escapeHtml(p.tester)}" class="cert-trigger mt-4 w-full bg-[#1e2e4a] hover:bg-[#2f4060] py-2.5 rounded-xl text-sm font-bold transition flex items-center justify-center gap-2"><i class="fas fa-certificate text-blue-300"></i> Get Certificate</button>
+      </div>
+    `).join('');
+    attachCertTriggers();
+  }
+  
+  function renderTable() {
+    const filtered = filterAndSortPlayers();
+    document.getElementById('totalPlayers').innerText = PLAYERS.length;
+    document.getElementById('totalPlayersNav').innerText = PLAYERS.length;
+    const disp = filtered.slice(0, displayLimit);
+    const hasMore = filtered.length > displayLimit;
+    const tbody = document.getElementById('tableBody');
+    if(disp.length===0){ tbody.innerHTML='<tr><td colspan="5" class="p-8 text-center text-[#8f9ec2]">No players found</td></tr>'; document.getElementById('paginationInfo').innerText='0 players'; document.getElementById('showMoreBtn').classList.add('hidden'); return; }
+    let html = '';
+    disp.forEach(p => {
+      const rank = getPlayerRank(p.ign);
+      html += `<tr class="hover:bg-[#1e2e4a]/80 transition"><td class="p-4"><span class="rank-number">#${rank}</span></td><td class="p-4 font-bold flex items-center gap-2"><i class="fas fa-gamepad text-blue-500"></i>${escapeHtml(p.ign)}</td><td class="p-4 text-[#cbd9ff]"><i class="fas fa-user-check mr-1 text-blue-400"></i>${escapeHtml(p.tester)}</td><td class="p-4">${getTierBadge(p.tier)}</td><td class="p-4 text-center"><button data-ign="${escapeHtml(p.ign)}" data-tier="${p.tier}" data-tester="${escapeHtml(p.tester)}" class="cert-trigger text-[#98b2f0] hover:text-white text-xl transition"><i class="fas fa-certificate"></i></button></td></tr>`;
     });
-
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => {
-          b.classList.remove('bg-gradient-to-r', 'from-[#00d4ff]', 'to-[#7b2ff7]', 'text-white', 'shadow-lg');
-          b.classList.add('bg-transparent');
-        });
-        btn.classList.add('bg-gradient-to-r', 'from-[#00d4ff]', 'to-[#7b2ff7]', 'text-white', 'shadow-lg');
-        btn.classList.remove('bg-transparent');
-        currentFilter = btn.dataset.filter;
-        displayLimit = 10;
-        updateUI();
-      });
+    tbody.innerHTML = html;
+    document.getElementById('paginationInfo').innerText = `Showing ${disp.length} of ${filtered.length} player${filtered.length!==1?'s':''}`;
+    const moreBtn = document.getElementById('showMoreBtn');
+    if(hasMore && searchTerm === '') moreBtn.classList.remove('hidden');
+    else moreBtn.classList.add('hidden');
+    attachCertTriggers();
+  }
+  
+  function renderSearchCard() {
+    const container = document.getElementById('playerCardContainer');
+    if(!searchTerm.trim()) { container.classList.add('hidden'); return; }
+    const filtered = filterAndSortPlayers();
+    const exact = PLAYERS.find(p=>p.ign.toLowerCase()===searchTerm.toLowerCase()) || filtered[0];
+    if(!exact) { container.innerHTML=`<div class="gamster-card p-8 text-center"><i class="fas fa-user-slash text-4xl mb-2"></i><p>No result</p></div>`; container.classList.remove('hidden'); return; }
+    container.innerHTML = `<div class="gamster-card p-6 border-l-4 border-[#3b82f6]"><div class="flex flex-col items-center gap-3"><div class="w-20 h-20 rounded-full bg-gradient-to-b from-[#1e2b4e] to-[#0b1120] flex items-center justify-center border-2 border-blue-500"><i class="fas fa-user text-3xl text-blue-300"></i></div><h3 class="text-3xl font-black">${escapeHtml(exact.ign)}</h3>${getTierBadge(exact.tier)}<p class="text-[#b9c8ff]"><i class="fas fa-user-check mr-1"></i>Tester: ${escapeHtml(exact.tester)}</p><button data-ign="${escapeHtml(exact.ign)}" data-tier="${exact.tier}" data-tester="${exact.tester}" class="cert-trigger bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-xl font-bold flex gap-2"><i class="fas fa-certificate"></i> Get Certificate</button></div></div>`;
+    container.classList.remove('hidden');
+    attachCertTriggers();
+  }
+  
+  function attachCertTriggers() {
+    document.querySelectorAll('.cert-trigger').forEach(btn => {
+      btn.removeEventListener('click', certHandler);
+      btn.addEventListener('click', certHandler);
     });
-
-    // Show More button
-    showMoreBtn.addEventListener('click', () => {
-      displayLimit += 10;
-      updateUI();
-    });
-
-    // Sorting
-    document.querySelectorAll('[data-sort]').forEach(th => {
-      th.addEventListener('click', () => {
-        const field = th.dataset.sort;
-        if (currentSort.field === field) {
-          currentSort.asc = !currentSort.asc;
-        } else {
-          currentSort.field = field;
-          currentSort.asc = true;
-        }
-        updateUI();
-        
-        // Update sort icons
-        document.querySelectorAll('[data-sort] i.fa-sort').forEach(icon => {
-          icon.className = 'fas fa-sort ml-1 text-xs';
-        });
-        const icon = th.querySelector('i.fa-sort');
-        if (icon) {
-          icon.className = `fas fa-sort-${currentSort.asc ? 'up' : 'down'} ml-1 text-xs`;
-        }
-      });
-    });
-
-    // Share functionality
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.share-trigger, .copy-trigger');
-      if (!btn) return;
-      
-      const ign = btn.dataset.ign;
-      const tier = btn.dataset.tier;
-      
-      if (btn.classList.contains('copy-trigger')) {
-        navigator.clipboard?.writeText(`${ign} - Tier ${tier} | Gamster Tier Tests`).then(() => {
-          alert(`✅ Copied: ${ign} (${tier})`);
-        });
-      } else {
-        shareText.innerText = `🏆 ${ign} achieved Tier ${tier} in Gamster Tier Tests! GUC Community`;
-        shareModal.classList.remove('hidden');
-      }
-    });
-
-    // Modal controls
-    closeShareModal.addEventListener('click', () => shareModal.classList.add('hidden'));
-    closeModalBtn.addEventListener('click', () => shareModal.classList.add('hidden'));
-    copyShareBtn.addEventListener('click', () => {
-      navigator.clipboard?.writeText(shareText.innerText);
-      alert('📋 Copied to clipboard!');
-      shareModal.classList.add('hidden');
-    });
-    shareModal.addEventListener('click', (e) => {
-      if (e.target === shareModal) shareModal.classList.add('hidden');
-    });
-
-    // Back to top
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTop.style.opacity = '1';
-        backToTop.style.visibility = 'visible';
-      } else {
-        backToTop.style.opacity = '0';
-        backToTop.style.visibility = 'hidden';
-      }
-    });
-    
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Initialize
-    updateUI();
-    
-  })();
+  }
+  function certHandler(e) {
+    const btn = e.currentTarget;
+    const ign = btn.getAttribute('data-ign');
+    const tier = btn.getAttribute('data-tier');
+    const tester = btn.getAttribute('data-tester');
+    const player = PLAYERS.find(p=>p.ign===ign) || { ign, tier, tester };
+    showCertificateModal(player);
+  }
+  
+  function updateAll() { renderTable(); renderTop(); renderSearchCard(); }
+  
+  document.getElementById('searchInput').addEventListener('input', (e) => { searchTerm = e.target.value; displayLimit=10; document.getElementById('clearSearch').classList.toggle('hidden', !searchTerm); updateAll(); });
+  document.getElementById('clearSearch').addEventListener('click', () => { document.getElementById('searchInput').value=''; searchTerm=''; displayLimit=10; document.getElementById('clearSearch').classList.add('hidden'); updateAll(); });
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => { document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); currentFilter = btn.getAttribute('data-filter'); displayLimit=10; updateAll(); }));
+  document.querySelectorAll('[data-sort]').forEach(th => th.addEventListener('click', () => { const field = th.getAttribute('data-sort'); currentSort = { field, asc: currentSort.field===field ? !currentSort.asc : true }; updateAll(); }));
+  document.getElementById('showMoreBtn').addEventListener('click', () => { displayLimit += 10; updateAll(); });
+  
+  window.addEventListener('scroll', () => { const btn=document.getElementById('backToTop'); if(window.scrollY>300) { btn.style.opacity='1'; btn.style.visibility='visible'; } else { btn.style.opacity='0'; btn.style.visibility='hidden'; } });
+  document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+  
+  updateAll();
+})();
 </script>
-
 </body>
 </html>
