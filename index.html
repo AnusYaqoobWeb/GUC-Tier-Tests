@@ -355,36 +355,16 @@
 (function(){
   // ========== PLAYER DATA ==========
   const PLAYERS = [
-   { ign: "raifgamingyt", tester: "Arzoz", tier: "A" },
-{ ign: "GojoCookie", tester: "Arzoz", tier: "C" },
-{ ign: "HelexMC", tester: "Yuno78", tier: "B" },
-{ ign: "ZeroTick", tester: "oth", tier: "S" },
-{ ign: "Arzoz", tester: "oth", tier: "A" },
-{ ign: "Enitity__303", tester: "432_", tier: "C-" },
-{ ign: "ItzCold_YT", tester: "432_", tier: "A-" },
-{ ign: "Thewier", tester: "432_", tier: "A+" },
-{ ign: "L1CH", tester: "432_", tier: "A" },
-{ ign: "xAlexK3NG_", tester: "Yuno78", tier: "B" },
-{ ign: "IamNotDevilMC", tester: "432_", tier: "A+" },
-{ ign: "Catbrine", tester: "432", tier: "A+" },
-{ ign: "Enzoylovesoreo", tester: "432_", tier: "A" },
-{ ign: "Abhirup", tester: "KingJerusalem", tier: "C+" },
-{ ign: "pixelwarrioryt", tester: "Yuno78", tier: "B+" },
-{ ign: "Restarted", tester: "UkOnly", tier: "A-" },
-{ ign: "Browsing_", tester: "othie", tier: "B-" },
-{ ign: "__Azzz", tester: "432", tier: "C+" },
-{ ign: "Myxi", tester: "UkOnly", tier: "A+" },
-{ ign: "UkOnly", tester: "othie", tier: "B+" },
-{ ign: "Zonqie", tester: "432", tier: "C-" },
-{ ign: "dimonking", tester: "432_", tier: "D" },
-{ ign: "ZerotTick", tester: "432_", tier: "A" },
-{ ign: "raifonly", tester: "432", tier: "A" },
-{ ign: "_ZestTapxD", tester: "432", tier: "B" },
-{ ign: "Swmkf", tester: "432", tier: "A" },
-{ ign: "Zhadow3", tester: "432", tier: "B-" },
-{ ign: "Sgnatures_", tester: "432", tier: "A-" },
-{ ign: "KitsuneKraze", tester: "432", tier: "A-" },
-{ ign: "MinoTotoro", tester: "oth0098", tier: "A-" }
+    { ign: "Zonqie", tester: "432", tier: "C-" },
+  { ign: "dimonking", tester: "432_", tier: "D" },
+  { ign: "ZerotTick", tester: "432_", tier: "A" },
+  { ign: "raifonly", tester: "432", tier: "A" },
+  { ign: "_ZestTapxD", tester: "432", tier: "B" },
+  { ign: "Swmkf", tester: "432", tier: "A" },
+  { ign: "Zhadow3", tester: "432", tier: "B-" },
+  { ign: "Sgnatures_", tester: "432", tier: "A-" },
+  { ign: "KitsuneKraze", tester: "432", tier: "A-" },
+  { ign: "MinoTotoro", tester: "oth0098", tier: "A-" }
   ];
   
   // Fixed tier ranking order - proper hierarchy from highest to lowest
@@ -445,7 +425,7 @@
   
   // BIG SQUARE IMAGE FOR TOP 3 PLAYERS
   function getTopPlayerSkinImage(ign) {
-    const skins = { "Catbrine": "/skins/catbrine.png", "IamNotDevilMC": "/skins/devil.png", "ZeroTick": "/skins/oo.png" };
+    const skins = { "raifonly": "/skins/catbrine.png", "Swmkf": "/skins/devil.png", "ZerotTick": "/skins/oo.png" };
     const skinPath = skins[ign] || `/skins/default.png`;
     return `<img src="${skinPath}" alt="${ign}" class="top-player-skin" onerror="this.onerror=null; this.src='/skins/default.png';">`;
   }
