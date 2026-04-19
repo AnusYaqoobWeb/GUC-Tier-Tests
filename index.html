@@ -139,13 +139,8 @@
       border-color: #8b5cf6 !important;
     }
     
-    /* D TIER - RED */
-    .tier-badge-D {
-      background: linear-gradient(135deg, #1b0101, #df0c0c) !important;
-      color: white !important;
-      border-color: #ef4444 !important;
-      box-shadow: 0 0 8px rgba(220, 38, 38, 0.3) !important;
-    }
+  
+    
     
     /* ===== TOP 3 PLAYER IMAGES - BIG SQUARE BOXES ===== */
     .top-player-skin {
@@ -361,6 +356,7 @@
   { ign: "gb2144_", tester: "432_", tier: "D-" },
   { ign: "ZerotTick", tester: "432_", tier: "A" },
   { ign: "raifonly", tester: "432", tier: "A" },
+   { ign: "Telshi", tester: "oth", tier: "A+" },
   { ign: "_ZestTapxD", tester: "432", tier: "B" },
   { ign: "Swmkf", tester: "432", tier: "A" },
   { ign: "Zhadow3", tester: "432", tier: "B-" },
@@ -383,7 +379,9 @@
     'C+': 8,
     'C': 9,
     'C-': 10,
-    'D': 11
+    'D+': 11,
+    'D': 12,
+    'D-': 13
   };
   
   function getGlobalRanked() {
@@ -420,7 +418,9 @@
       case 'C+': badgeClass = 'tier-badge-Cplus'; break;
       case 'C': badgeClass = 'tier-badge-C'; break;
       case 'C-': badgeClass = 'tier-badge-Cminus'; break;
+      case 'D+': badgeClass = 'tier-badge-Dplus'; break;
       case 'D': badgeClass = 'tier-badge-D'; break;
+      case 'D-': badgeClass = 'tier-badge-Dminus'; break;
       default: badgeClass = 'tier-badge-D';
     }
     return `<span class="tier-badge-base ${badgeClass}">TIER ${tier}</span>`;
@@ -428,7 +428,7 @@
   
   // BIG SQUARE IMAGE FOR TOP 3 PLAYERS
   function getTopPlayerSkinImage(ign) {
-    const skins = { "raifonly": "/skins/catbrine.png", "Swmkf": "/skins/devil.png", "ZerotTick": "/skins/oo.png" };
+    const skins = { "Telshi": "/skins/telshi.png", "raifonly": "/skins/oo.png", "Swmkf": "/skins/swmm.png" };
     const skinPath = skins[ign] || `/skins/default.png`;
     return `<img src="${skinPath}" alt="${ign}" class="top-player-skin" onerror="this.onerror=null; this.src='/skins/default.png';">`;
   }
