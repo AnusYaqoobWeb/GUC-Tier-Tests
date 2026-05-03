@@ -440,7 +440,7 @@
   
   // BIG SQUARE IMAGE FOR TOP 3 PLAYERS
   function getTopPlayerSkinImage(ign) {
-    const skins = { "Telshi": "/skins/telshi.png", "raifonly": "/skins/oo.png", "Swmkf": "/skins/swmm.png" };
+    const skins = { "Telshi": "/skins/telshi.png", "Swmkf": "/skins/oo.png", "UkOnly": "/skins/swmm.png" };
     const skinPath = skins[ign] || `/skins/default.png`;
     return `<img src="${skinPath}" alt="${ign}" class="top-player-skin" onerror="this.onerror=null; this.src='/skins/default.png';">`;
   }
