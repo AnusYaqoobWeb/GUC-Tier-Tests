@@ -68,7 +68,7 @@
 
     /* A+ TIER - PREMIUM GOLD */
     .tier-badge-Aplus {
-      background: linear-gradient(135deg, #a18a06, #4b3002, #ff9717) !important;
+      background: linear-gradient(135deg,#1C0F05, #8e371a,#D4AF37) !important;
       color: #1a1a2e !important;
       border-color: #FFB347 !important;
       box-shadow: 0 0 12px rgba(255, 215, 0, 0.5) !important;
@@ -77,7 +77,7 @@
     
     /* A TIER - BLUE */
     .tier-badge-A {
-      background:  linear-gradient(135deg, #ffffff, #4b3002, #000000) !important;
+      background:  linear-gradient(135deg, #2B0000, #7F1D1D,#DC2626) !important;
       color: white !important;
       border-color: #60a5fa !important;
       box-shadow: 0 0 10px rgba(59, 130, 246, 0.4) !important;
@@ -85,7 +85,7 @@
     
     /* A- TIER - DARK BLUE */
     .tier-badge-Aminus {
-      background: linear-gradient(135deg, #ffae008f, #b40505, #ff9f0f) !important;
+      background: linear-gradient(135deg, #1A0000, #450A0A, #991B1B) !important;
       color: #dbeafe !important;
       border-color: #3b82f6 !important;
     }
@@ -126,7 +126,7 @@
     
     /* C TIER - PURPLE */
     .tier-badge-C {
-      background: linear-gradient(135deg, #1b0229, #2c0730) !important;
+      background: linear-gradient(135deg,#a600ff, #2D004D, #6B21A8) !important;
       color: #ede9fe !important;
       border-color: #a78bfa !important;
       box-shadow: 0 0 10px rgba(139, 92, 246, 0.4) !important;
@@ -191,8 +191,226 @@
     
     td .tier-badge-base, .top-card .tier-badge-base { width: auto; min-width: 88px; }
     
-    @keyframes slideUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
-    .animate-slide-up { animation: slideUp 0.5s cubic-bezier(0.2, 0.9, 0.3, 1) forwards; }
+    /* GPU Accelerated Entrance Animation */
+    @keyframes slideUpPremium {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 28px, 0) scale(0.98);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+    .animate-slide-up {
+      animation: slideUpPremium 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+    }
+
+    /* Staggered children animations */
+    .stagger-grid > * {
+      opacity: 0;
+      animation: slideUpPremium 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+    }
+    .stagger-grid > *:nth-child(1) { animation-delay: 0.02s; }
+    .stagger-grid > *:nth-child(2) { animation-delay: 0.08s; }
+    .stagger-grid > *:nth-child(3) { animation-delay: 0.14s; }
+    .stagger-grid > *:nth-child(4) { animation-delay: 0.20s; }
+    .stagger-grid > *:nth-child(5) { animation-delay: 0.26s; }
+    .stagger-grid > *:nth-child(6) { animation-delay: 0.32s; }
+
+    /* Hover micro-interactions */
+    .top-card, .gamster-card, .filter-btn, .cert-action-btn, button, tr {
+      transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1), 
+                  box-shadow 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.05),
+                  background-color 0.2s ease,
+                  border-color 0.2s ease;
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+    
+    .top-card {
+      transform: translateY(0px);
+      transition: transform 0.35s cubic-bezier(0.15, 0.9, 0.25, 1), 
+                  box-shadow 0.4s cubic-bezier(0.2, 0.9, 0.3, 1),
+                  border-color 0.2s ease;
+    }
+    .top-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(59,130,246,0.4);
+    }
+    
+    /* Premium hover lift for table rows */
+    tr {
+      transform: translateX(0px);
+      transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.4, 1), background 0.15s;
+    }
+    tr:hover {
+      transform: translateX(6px) scale(1.002);
+    }
+
+    /* Soft glow pulse for badges on hover */
+    .tier-badge-base {
+      transition: transform 0.2s cubic-bezier(0.34, 1.2, 0.64, 1), box-shadow 0.25s ease, filter 0.2s;
+      will-change: transform;
+    }
+    .tier-badge-base:hover {
+      transform: scale(1.04);
+      filter: brightness(1.05) saturate(1.1);
+      box-shadow: 0 0 22px rgba(59, 130, 246, 0.5);
+    }
+    
+    /* Buttons and interactive elements */
+    .filter-btn {
+      transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.2), background 0.2s, box-shadow 0.2s;
+      transform: translateY(0px);
+    }
+    .filter-btn:hover:not(.active) {
+      transform: translateY(-2px);
+      background: #1e2b4e !important;
+      box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+    }
+    .filter-btn.active {
+      transform: scale(1.02);
+      box-shadow: 0 8px 18px -6px #3b82f6;
+    }
+    
+    /* Search input focus-lift */
+    #searchInput {
+      transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.4, 1), border-color 0.2s, box-shadow 0.2s;
+    }
+    #searchInput:focus {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px -8px rgba(59,130,246,0.4);
+    }
+
+    /* Back to top smooth Hover */
+    .back-to-top {
+      transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.2), opacity 0.2s, background 0.2s;
+      will-change: transform;
+    }
+    .back-to-top:hover {
+      transform: scale(1.08) translateY(-3px);
+      background: #2d3a52;
+    }
+    
+    /* Certificate Modal premium animation */
+    .certificate-modal {
+      transition: backdrop-filter 0.3s ease;
+    }
+    .certificate-modal.active {
+      animation: fadeInSoft 0.3s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+    }
+    @keyframes fadeInSoft {
+      from { opacity: 0; backdrop-filter: blur(0px); }
+      to { opacity: 1; backdrop-filter: blur(16px); }
+    }
+    .certificate-card {
+      transform: scale(0.96) translateY(20px);
+      opacity: 0;
+      transition: transform 0.5s cubic-bezier(0.15, 0.9, 0.25, 1.1), opacity 0.4s ease;
+      will-change: transform, opacity;
+    }
+    .certificate-modal.active .certificate-card {
+      transform: scale(1) translateY(0px);
+      opacity: 1;
+    }
+    
+    /* New premium micro-reveal for certificate buttons */
+    .cert-action-btn {
+      transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.2), background 0.2s, box-shadow 0.2s;
+    }
+    .cert-action-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px -8px rgba(0,0,0,0.5);
+    }
+    .cert-action-btn.screenshot-btn:hover {
+      background: #2563eb;
+      filter: brightness(1.05);
+    }
+    
+    /* Table Header sort hover */
+    [data-sort] {
+      transition: color 0.2s, transform 0.1s;
+    }
+    [data-sort]:hover {
+      transform: translateY(-1px);
+    }
+    
+    /* Show more button lift */
+    #showMoreBtn {
+      transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.2), background 0.2s;
+    }
+    #showMoreBtn:hover {
+      transform: translateY(-2px);
+      background: #2f4270;
+    }
+    
+    /* Toast animation */
+    .screenshot-toast {
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.3s;
+      will-change: transform, opacity;
+    }
+    .screenshot-toast.show {
+      transform: translateX(-50%) translateY(0px) scale(1.02);
+    }
+    
+    .player-skin {
+      transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.3s;
+    }
+    .player-skin:hover {
+      transform: scale(1.04) rotate(1deg);
+      box-shadow: 0 0 22px rgba(59, 130, 246, 0.7);
+    }
+    
+    /* GUC Nav floating subtle animation */
+    .guc-nav {
+      transform: translateY(0);
+      transition: transform 0.2s;
+    }
+    
+    /* Pagination and info fade */
+    #paginationInfo {
+      transition: opacity 0.2s;
+    }
+    
+    /* Any dynamic element addition */
+    .top-card, .cert-trigger {
+      cursor: pointer;
+    }
+    
+    .sticky-header th {
+      transition: background 0.1s;
+    }
+    
+    /* Extra micro animation for clear search button */
+    #clearSearch {
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    #clearSearch:hover {
+      transform: scale(1.15);
+    }
+    .cert-trigger {
+      transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.2), color 0.1s;
+    }
+    .cert-trigger:hover {
+      transform: scale(1.08);
+    }
+    
+    /* Full GPU acceleration for any transform changes */
+    .top-player-skin, .player-skin, .top-card, .filter-btn, .certificate-card {
+      backface-visibility: hidden;
+    }
+    
+    /* Fix for perfect framerate */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    
     .sticky-header th { position: sticky; top: 0; background: var(--bg-elevated); z-index: 10; border-bottom: 1px solid var(--border-subtle); font-weight: 700; }
     .filter-btn { background: transparent; color: #9aa9c2; border: 1px solid transparent; transition: all 0.2s ease; font-weight: 600; border-radius: 14px; cursor: pointer; }
     .filter-btn.active { background: #3b82f6 !important; color: white !important; border-color: #3b82f6 !important; box-shadow: 0 6px 14px -4px #3b82f6; }
@@ -205,7 +423,7 @@
     .screenshot-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1e293b; backdrop-filter: blur(20px); background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid #3b82f6; border-radius: 60px; padding: 14px 28px; display: flex; align-items: center; gap: 12px; box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(59,130,246,0.3); z-index: 2100; font-weight: 600; font-size: 0.95rem; color: white; opacity: 0; transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1); pointer-events: none; }
     .screenshot-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     .certificate-modal { position: fixed; inset: 0; background: rgba(5, 8, 14, 0.98); backdrop-filter: blur(16px); z-index: 1000; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 1.5rem; padding: 1rem; }
-    .certificate-modal.active { display: flex; animation: fadeIn 0.25s ease; }
+    .certificate-modal.active { display: flex; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .certificate-card { width: 620px; max-width: 92vw; background: #0c0f16; border-radius: 48px; padding: 2rem 1.8rem; position: relative; overflow: hidden; border: 1px solid rgba(59, 130, 246, 0.5); box-shadow: 0 35px 55px -15px rgba(0,0,0,0.8); margin: 0 auto; backface-visibility: hidden; transform: translateZ(0); }
     .certificate-card::before { content: "◆ GUC OFFICIAL ◆"; position: absolute; bottom: 35px; right: -20px; font-size: 58px; font-weight: 900; color: rgba(59, 130, 246, 0.06); transform: rotate(-18deg); pointer-events: none; white-space: nowrap; font-family: monospace; }
@@ -225,7 +443,6 @@
     tr:hover { background: #1a2538 !important; }
     .guc-nav { background: rgba(7, 11, 20, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(59, 130, 246, 0.25); }
     
-    /* Enhanced Mobile Responsiveness */
     @media (max-width: 768px) {
       .guc-nav { padding: 0.75rem 1rem; }
       .guc-nav .font-extrabold { font-size: 1rem; }
@@ -283,7 +500,7 @@
             <img src="/assets/Sleek _GUC_ logo with colorful swoosh.png" alt="Logo" class="w-10 h-10 rounded-xl border border-[#3b82f6]/60 object-cover">
             <span>Tier Tests <span class="text-blue-400">Leaderboard</span></span>
           </h1>
-          <p class="text-[#9aaec9] mt-2"><i class="fas fa-chart-line text-blue-500 mr-2"></i> Global ranking · Color Coded Tier System</p>
+          <p class="text-[#9aaec9] mt-2"><i class="fas fa-chart-line text-blue-500 mr-2"></i> Global ranking · Only the Strongest Rise</p>
         </div>
         <div class="bg-[#0f1a2b] px-5 py-2.5 rounded-2xl border border-[#2e405b]">
           <i class="fas fa-users text-[#3b82f6] mr-2"></i>
@@ -317,7 +534,7 @@
         <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#1e2b4e] to-[#0f172a] flex items-center justify-center border border-[#3b82f6]"><i class="fas fa-medal text-[#fbbf24] text-xl"></i></div>
         <h2 class="text-2xl font-extrabold text-white">🏆 Elite Performers</h2>
       </div>
-      <div id="topPlayersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <div id="topPlayersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger-grid"></div>
     </div>
 
     <div class="gamster-card rounded-3xl overflow-hidden">
@@ -348,295 +565,72 @@
 
 <script>
 (function(){
-  // ========== PLAYER DATA ==========
   const PLAYERS = [
     { ign: "Zonqie", tester: "432", tier: "C-" },
     { ign: "SG_AMOGH_1", tester: "oth0098", tier: "C" },
-
-  { ign: "dimonking", tester: "432_", tier: "D" },
-  { ign: "ash2012_", tester: "432_", tier: "D+" },
-  { ign: "gb2144_", tester: "432_", tier: "D-" },
-  { ign: "ZerotTick", tester: "432_", tier: "A" },
-  { ign: "UkOnly", tester: "432_", tier: "A" },
-
- 
-   { ign: "Telshi", tester: "oth", tier: "A+" },
-  { ign: "_ZestTapxD", tester: "432", tier: "B" },
-  { ign: " Disheet", tester: "432", tier: "A-" },
-  { ign: " raifxq", tester: "oth0098", tier: "B+" },
-
-  { ign: "Swmkf", tester: "432", tier: "A" },
-  { ign: "Zhadow3", tester: "432", tier: "B-" },
-  { ign: " abdullah_613", tester: "432", tier: "B-" },
-  { ign: "AhmedX8888", tester: "432", tier: "B-" },
-  { ign: "oxc", tester: "snoshii", tier: "B-" },
+    { ign: "dimonking", tester: "432_", tier: "D" },
+    { ign: "ash2012_", tester: "432_", tier: "D+" },
+    { ign: "gb2144_", tester: "432_", tier: "D-" },
+    { ign: "ZerotTick", tester: "432_", tier: "A" },
+    { ign: "UkOnly", tester: "432_", tier: "A" },
+    { ign: "Telshi", tester: "oth", tier: "A+" },
+    { ign: "_ZestTapxD", tester: "432", tier: "B" },
+    { ign: " Disheet", tester: "432", tier: "A-" },
+    { ign: " raifxq", tester: "oth0098", tier: "B+" },
+    { ign: "Swmkf", tester: "432", tier: "A" },
+    { ign: "Zhadow3", tester: "432", tier: "B-" },
+    { ign: " abdullah_613", tester: "432", tier: "B-" },
+    { ign: "AhmedX8888", tester: "432", tier: "B-" },
+    { ign: "oxc", tester: "snoshii", tier: "B-" },
     { ign: "Knearly_", tester: "snoshii", tier: "B-" },
-  { ign: "h2mzh", tester: "oth0098", tier: "B-" },
-
-  { ign: "Sgnatures_", tester: "432", tier: "A-" },
-  { ign: "KitsuneKraze", tester: "432", tier: "A-" },
-  { ign: "MinoTotoro", tester: "oth0098", tier: "A-" }
+    { ign: "h2mzh", tester: "oth0098", tier: "B-" },
+    { ign: "Sgnatures_", tester: "432", tier: "A-" },
+    { ign: "KitsuneKraze", tester: "432", tier: "A-" },
+    { ign: "MinoTotoro", tester: "oth0098", tier: "A-" }
   ];
   
-  // Fixed tier ranking order - proper hierarchy from highest to lowest
   const tierRank = {
-    'S+': 0,
-    'S': 1,
-    'A+': 2,
-    'A': 3,
-    'A-': 4,
-    'B+': 5,
-    'B': 6,
-    'B-': 7,
-    'C+': 8,
-    'C': 9,
-    'C-': 10,
-    'D+': 11,
-    'D': 12,
-    'D-': 13
+    'S+': 0,'S':1,'A+':2,'A':3,'A-':4,'B+':5,'B':6,'B-':7,'C+':8,'C':9,'C-':10,'D+':11,'D':12,'D-':13
   };
-  
-  function getGlobalRanked() {
-    return [...PLAYERS].sort((a,b) => {
-      let rankA = tierRank[a.tier] !== undefined ? tierRank[a.tier] : 99;
-      let rankB = tierRank[b.tier] !== undefined ? tierRank[b.tier] : 99;
-      if(rankA !== rankB) return rankA - rankB;
-      return a.ign.localeCompare(b.ign);
-    });
-  }
-  
-  function getPlayerRank(ign) { 
-    const ranked = getGlobalRanked(); 
-    const idx = ranked.findIndex(p => p.ign === ign); 
-    return idx !== -1 ? idx+1 : null; 
-  }
-  
-  function escapeHtml(str) { 
-    if(!str) return ''; 
-    return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); 
-  }
-  
+  function getGlobalRanked() { return [...PLAYERS].sort((a,b) => (tierRank[a.tier]||99)-(tierRank[b.tier]||99) || a.ign.localeCompare(b.ign)); }
+  function getPlayerRank(ign) { const idx = getGlobalRanked().findIndex(p => p.ign === ign); return idx !== -1 ? idx+1 : null; }
+  function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
   function getTierBadge(tier) {
     let badgeClass = '';
     switch(tier) {
-      case 'S+': badgeClass = 'tier-badge-Splus'; break;
-      case 'S': badgeClass = 'tier-badge-S'; break;
-      case 'A+': badgeClass = 'tier-badge-Aplus'; break;
-      case 'A': badgeClass = 'tier-badge-A'; break;
-      case 'A-': badgeClass = 'tier-badge-Aminus'; break;
-      case 'B+': badgeClass = 'tier-badge-Bplus'; break;
-      case 'B': badgeClass = 'tier-badge-B'; break;
-      case 'B-': badgeClass = 'tier-badge-Bminus'; break;
-      case 'C+': badgeClass = 'tier-badge-Cplus'; break;
-      case 'C': badgeClass = 'tier-badge-C'; break;
-      case 'C-': badgeClass = 'tier-badge-Cminus'; break;
-      case 'D+': badgeClass = 'tier-badge-Dplus'; break;
-      case 'D': badgeClass = 'tier-badge-D'; break;
-      case 'D-': badgeClass = 'tier-badge-Dminus'; break;
-      default: badgeClass = 'tier-badge-D';
-    }
-    return `<span class="tier-badge-base ${badgeClass}">TIER ${tier}</span>`;
+      case 'S+': badgeClass = 'tier-badge-Splus'; break; case 'S': badgeClass = 'tier-badge-S'; break; case 'A+': badgeClass = 'tier-badge-Aplus'; break;
+      case 'A': badgeClass = 'tier-badge-A'; break; case 'A-': badgeClass = 'tier-badge-Aminus'; break; case 'B+': badgeClass = 'tier-badge-Bplus'; break;
+      case 'B': badgeClass = 'tier-badge-B'; break; case 'B-': badgeClass = 'tier-badge-Bminus'; break; case 'C+': badgeClass = 'tier-badge-Cplus'; break;
+      case 'C': badgeClass = 'tier-badge-C'; break; case 'C-': badgeClass = 'tier-badge-Cminus'; break; default: badgeClass = 'tier-badge-D';
+    } return `<span class="tier-badge-base ${badgeClass}">TIER ${tier}</span>`;
   }
-  
-  // BIG SQUARE IMAGE FOR TOP 3 PLAYERS
-  function getTopPlayerSkinImage(ign) {
-    const skins = { "Telshi": "/skins/telshi.png", "Swmkf": "/skins/oo.png", "UkOnly": "/skins/swmm.png" };
-    const skinPath = skins[ign] || `/skins/default.png`;
-    return `<img src="${skinPath}" alt="${ign}" class="top-player-skin" onerror="this.onerror=null; this.src='/skins/default.png';">`;
-  }
-  
-  // Normal circular image for table
-  function getPlayerSkinImage(ign) {
-    const skins = { "Catbrine": "/skins/catbrine.png", "IamNotDevilMC": "/skins/devil.png", "Myxi": "/skins/oo.png" };
-    const skinPath = skins[ign] || `/skins/default.png`;
-    return `<img src="${skinPath}" alt="${ign}" class="player-skin" onerror="this.onerror=null; this.src='/skins/default.png';">`;
-  }
-  
-  function generateCertId(ign) { 
-    const rand = Math.random().toString(36).substring(2,8).toUpperCase(); 
-    const time = Date.now().toString(36).slice(-4); 
-    return `GUC-${ign.substring(0,3).toUpperCase()}-${rand}${time}`; 
-  }
-  
-  function getTimestamp() { 
-    const now = new Date(); 
-    return now.toLocaleString('en-US', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit' }); 
-  }
-  
-  function showScreenshotToast() {
-    const existingToast = document.querySelector('.screenshot-toast');
-    if(existingToast) existingToast.remove();
-    const toast = document.createElement('div');
-    toast.className = 'screenshot-toast';
-    toast.innerHTML = `<i class="fas fa-camera-retro"></i><span>📸 Screenshot manually (PrtSc / mobile screenshot)</span><i class="fas fa-mobile-alt text-blue-300"></i>`;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.classList.add('show'), 10);
-    setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 300); }, 3000);
-  }
-  
-  function buildCertificateHTML(player, rank, certId, ts) {
-    return `<div class="certificate-card" id="certificateInner">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem;"><div style="background: #1a1f2e; padding: 6px 16px; border-radius: 999px; font-size: 11px; font-weight: 700;"><i class="fas fa-gamepad" style="margin-right: 4px; color: #60a5fa;"></i> GUC | COMPETITIVE</div><div style="background: rgba(59,165,93,0.12); border: 1px solid #3ba55d; border-radius: 999px; padding: 6px 12px; font-size: 11px; font-weight: 700; color: #6fcf97;"><i class="fas fa-check-circle"></i> VERIFIED OFFICIAL</div></div>
-      <div class="cert-player-name">${escapeHtml(player.ign)}</div>
-      <div style="text-align: center; margin: 8px 0;"><div class="cert-tier">🏅 TIER ${escapeHtml(player.tier)}</div></div>
-      <div style="text-align: center; margin-top: 4px;"><span class="cert-rank"><i class="fas fa-hashtag"></i> GLOBAL RANK #${rank}</span></div>
-      <div class="cert-tested">📋 Tested by ${escapeHtml(player.tester)} • Official GUC System</div>
-      <div class="cert-footer-text">Official Tier Test Certificate – Gamster Tier Tests</div>
-      <div class="cert-meta-row"><span>🆔 ID: ${certId}</span><span>📅 ${ts}</span></div>
-    </div>`;
-  }
-  
-  function showCertificateModal(player) {
-    const rank = getPlayerRank(player.ign);
-    if(!rank) return;
-    const certId = generateCertId(player.ign);
-    const ts = getTimestamp();
-    document.getElementById('certificateContainer').innerHTML = buildCertificateHTML(player, rank, certId, ts);
-    document.getElementById('certificateModal').classList.add('active');
-  }
-  
+  function getTopPlayerSkinImage(ign) { const skins = { "Telshi": "/skins/telshi.png", "Swmkf": "/skins/oo.png", "UkOnly": "/skins/swmm.png" }; return `<img src="${skins[ign] || '/skins/default.png'}" alt="${ign}" class="top-player-skin" onerror="this.onerror=null; this.src='/skins/default.png';">`; }
+  function generateCertId(ign) { return `GUC-${ign.substring(0,3).toUpperCase()}-${Math.random().toString(36).substring(2,8).toUpperCase()}${Date.now().toString(36).slice(-4)}`; }
+  function getTimestamp() { return new Date().toLocaleString('en-US', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit' }); }
+  function showScreenshotToast() { const toast = document.createElement('div'); toast.className = 'screenshot-toast'; toast.innerHTML = `<i class="fas fa-camera-retro"></i><span>📸 Screenshot manually (PrtSc / mobile screenshot)</span><i class="fas fa-mobile-alt text-blue-300"></i>`; document.body.appendChild(toast); setTimeout(() => toast.classList.add('show'), 10); setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 300); }, 3000); }
+  function buildCertificateHTML(player, rank, certId, ts) { return `<div class="certificate-card" id="certificateInner"><div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 1rem;"><div style="background: #1a1f2e; padding: 6px 16px; border-radius: 999px; font-size: 11px; font-weight: 700;"><i class="fas fa-gamepad" style="margin-right: 4px; color: #60a5fa;"></i> GUC | COMPETITIVE</div><div style="background: rgba(59,165,93,0.12); border: 1px solid #3ba55d; border-radius: 999px; padding: 6px 12px; font-size: 11px; font-weight: 700; color: #6fcf97;"><i class="fas fa-check-circle"></i> VERIFIED OFFICIAL</div></div><div class="cert-player-name">${escapeHtml(player.ign)}</div><div style="text-align: center; margin: 8px 0;"><div class="cert-tier">🏅 TIER ${escapeHtml(player.tier)}</div></div><div style="text-align: center; margin-top: 4px;"><span class="cert-rank"><i class="fas fa-hashtag"></i> GLOBAL RANK #${rank}</span></div><div class="cert-tested">📋 Tested by ${escapeHtml(player.tester)} • Official GUC System</div><div class="cert-footer-text">Official Tier Test Certificate – Gamster Tier Tests</div><div class="cert-meta-row"><span>🆔 ID: ${certId}</span><span>📅 ${ts}</span></div></div>`; }
+  function showCertificateModal(player) { const rank = getPlayerRank(player.ign); if(!rank) return; document.getElementById('certificateContainer').innerHTML = buildCertificateHTML(player, rank, generateCertId(player.ign), getTimestamp()); document.getElementById('certificateModal').classList.add('active'); }
   document.getElementById('screenshotGuideBtn').addEventListener('click', showScreenshotToast);
   document.getElementById('closeCertModal').addEventListener('click',()=> document.getElementById('certificateModal').classList.remove('active'));
   document.getElementById('certificateModal').addEventListener('click',(e)=>{ if(e.target === document.getElementById('certificateModal')) document.getElementById('certificateModal').classList.remove('active'); });
-  
-  let currentFilter = 'all';
-  let currentSort = { field: 'rank', asc: true };
-  let searchTerm = '';
-  let displayLimit = 10;
-  
+  let currentFilter = 'all', currentSort = { field: 'rank', asc: true }, searchTerm = '', displayLimit = 10;
   function filterAndSortPlayers() {
-    let filtered = PLAYERS.filter(p => {
-      if(currentFilter === 'all') return true;
-      if(currentFilter === 'S') return p.tier === 'S' || p.tier === 'S+';
-      return p.tier.startsWith(currentFilter);
-    }).filter(p => p.ign.toLowerCase().includes(searchTerm.toLowerCase()));
-    
-    return [...filtered].sort((a,b) => {
-      if(currentSort.field === 'tier') { 
-        let val = (tierRank[a.tier]||99) - (tierRank[b.tier]||99); 
-        return currentSort.asc ? val : -val; 
-      }
-      if(currentSort.field === 'ign') return currentSort.asc ? a.ign.localeCompare(b.ign) : b.ign.localeCompare(a.ign);
-      if(currentSort.field === 'tester') return currentSort.asc ? a.tester.localeCompare(b.tester) : b.tester.localeCompare(a.tester);
-      const rankA = getPlayerRank(a.ign), rankB = getPlayerRank(b.ign);
-      return currentSort.asc ? rankA - rankB : rankB - rankA;
-    });
+    let filtered = PLAYERS.filter(p => (currentFilter === 'all' || (currentFilter === 'S' ? (p.tier === 'S' || p.tier === 'S+') : p.tier.startsWith(currentFilter))) && p.ign.toLowerCase().includes(searchTerm.toLowerCase()));
+    return [...filtered].sort((a,b) => { if(currentSort.field === 'tier') { let val = (tierRank[a.tier]||99)-(tierRank[b.tier]||99); return currentSort.asc ? val : -val; } if(currentSort.field === 'ign') return currentSort.asc ? a.ign.localeCompare(b.ign) : b.ign.localeCompare(a.ign); if(currentSort.field === 'tester') return currentSort.asc ? a.tester.localeCompare(b.tester) : b.tester.localeCompare(a.tester); const ra=getPlayerRank(a.ign), rb=getPlayerRank(b.ign); return currentSort.asc ? ra-rb : rb-ra; });
   }
-  
-  function renderTop() {
-    const top3 = getGlobalRanked().slice(0,3);
-    const medals = ['🥇','🥈','🥉'];
-    document.getElementById('topPlayersGrid').innerHTML = top3.map((p,i)=>`
-      <div class="top-card p-5 animate-slide-up cursor-pointer" style="animation-delay:${i*0.08}s">
-        <div class="flex justify-between items-start"><span class="text-3xl">${medals[i]}</span><span class="w-10 h-10 rounded-full flex items-center justify-center font-extrabold bg-[#1e2a3a]">#${i+1}</span></div>
-        <div style="display:flex; justify-content:center; margin: 10px 0;">${getTopPlayerSkinImage(p.ign)}</div>
-        <div class="text-2xl font-black text-white mt-2 text-center">${escapeHtml(p.ign)}</div>
-        <div class="my-3 text-center">${getTierBadge(p.tier)}</div>
-        <div class="text-sm text-[#b8c7f0] text-center"><i class="fas fa-id-card mr-1 text-blue-400"></i>${escapeHtml(p.tester)}</div>
-        <button data-ign="${escapeHtml(p.ign)}" data-tier="${p.tier}" data-tester="${escapeHtml(p.tester)}" class="cert-trigger mt-4 w-full bg-[#1e2e4a] hover:bg-[#2f4060] py-2.5 rounded-xl text-sm font-bold transition flex items-center justify-center gap-2"><i class="fas fa-certificate text-blue-300"></i> Get Certificate</button>
-      </div>
-    `).join('');
-    attachCertTriggers();
-  }
-  
-  function renderTable() {
-    const filtered = filterAndSortPlayers();
-    document.getElementById('totalPlayers').innerText = PLAYERS.length;
-    document.getElementById('totalPlayersNav').innerText = PLAYERS.length;
-    const disp = filtered.slice(0, displayLimit);
-    const hasMore = filtered.length > displayLimit;
-    const tbody = document.getElementById('tableBody');
-    if(disp.length===0){ 
-      tbody.innerHTML='<tr><td colspan="5" class="p-8 text-center text-[#8f9ec2]">No players found</td></tr>'; 
-      document.getElementById('paginationInfo').innerText='0 players'; 
-      document.getElementById('showMoreBtn').classList.add('hidden'); 
-      return; 
-    }
-    let html = '';
-    disp.forEach(p => {
-      const rank = getPlayerRank(p.ign);
-      html += `<tr class="hover:bg-[#1e2e4a]/80 transition"><td class="p-4"><span class="rank-number">#${rank}</span></td><td class="p-4 font-bold flex items-center gap-2"><i class="fas fa-gamepad text-blue-500"></i>${escapeHtml(p.ign)}</td><td class="p-4 text-[#cbd9ff]"><i class="fas fa-user-check mr-1 text-blue-400"></i>${escapeHtml(p.tester)}</td><td class="p-4">${getTierBadge(p.tier)}</td><td class="p-4 text-center"><button data-ign="${escapeHtml(p.ign)}" data-tier="${p.tier}" data-tester="${escapeHtml(p.tester)}" class="cert-trigger text-[#98b2f0] hover:text-white text-xl transition"><i class="fas fa-certificate"></i></button></td></tr>`;
-    });
-    tbody.innerHTML = html;
-    document.getElementById('paginationInfo').innerText = `Showing ${disp.length} of ${filtered.length} player${filtered.length!==1?'s':''}`;
-    const moreBtn = document.getElementById('showMoreBtn');
-    if(hasMore && searchTerm === '') moreBtn.classList.remove('hidden');
-    else moreBtn.classList.add('hidden');
-    attachCertTriggers();
-  }
-  
-  function renderSearchCard() {
-    const container = document.getElementById('playerCardContainer');
-    if(!searchTerm.trim()) { container.classList.add('hidden'); return; }
-    const filtered = filterAndSortPlayers();
-    const exact = PLAYERS.find(p=>p.ign.toLowerCase()===searchTerm.toLowerCase()) || filtered[0];
-    if(!exact) { 
-      container.innerHTML=`<div class="gamster-card p-8 text-center"><i class="fas fa-user-slash text-4xl mb-2"></i><p>No result</p></div>`; 
-      container.classList.remove('hidden'); 
-      return; 
-    }
-    container.innerHTML = `<div class="gamster-card p-6 border-l-4 border-[#3b82f6]"><div class="flex flex-col items-center gap-3"><div class="w-20 h-20 rounded-full bg-gradient-to-b from-[#1e2b4e] to-[#0b1120] flex items-center justify-center border-2 border-blue-500"><i class="fas fa-user text-3xl text-blue-300"></i></div><h3 class="text-3xl font-black">${escapeHtml(exact.ign)}</h3>${getTierBadge(exact.tier)}<p class="text-[#b9c8ff]"><i class="fas fa-user-check mr-1"></i>Tester: ${escapeHtml(exact.tester)}</p><button data-ign="${escapeHtml(exact.ign)}" data-tier="${exact.tier}" data-tester="${exact.tester}" class="cert-trigger bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-xl font-bold flex gap-2"><i class="fas fa-certificate"></i> Get Certificate</button></div></div>`;
-    container.classList.remove('hidden');
-    attachCertTriggers();
-  }
-  
-  function attachCertTriggers() {
-    document.querySelectorAll('.cert-trigger').forEach(btn => {
-      btn.removeEventListener('click', certHandler);
-      btn.addEventListener('click', certHandler);
-    });
-  }
-  
-  function certHandler(e) {
-    const btn = e.currentTarget;
-    const ign = btn.getAttribute('data-ign');
-    const tier = btn.getAttribute('data-tier');
-    const tester = btn.getAttribute('data-tester');
-    const player = PLAYERS.find(p=>p.ign===ign) || { ign, tier, tester };
-    showCertificateModal(player);
-  }
-  
-  function updateAll() { renderTable(); renderTop(); renderSearchCard(); }
-  
-  document.getElementById('searchInput').addEventListener('input', (e) => { 
-    searchTerm = e.target.value; 
-    displayLimit=10; 
-    document.getElementById('clearSearch').classList.toggle('hidden', !searchTerm); 
-    updateAll(); 
-  });
-  
-  document.getElementById('clearSearch').addEventListener('click', () => { 
-    document.getElementById('searchInput').value=''; 
-    searchTerm=''; 
-    displayLimit=10; 
-    document.getElementById('clearSearch').classList.add('hidden'); 
-    updateAll(); 
-  });
-  
-  document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => { 
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); 
-    btn.classList.add('active'); 
-    currentFilter = btn.getAttribute('data-filter'); 
-    displayLimit=10; 
-    updateAll(); 
-  }));
-  
-  document.querySelectorAll('[data-sort]').forEach(th => th.addEventListener('click', () => { 
-    const field = th.getAttribute('data-sort'); 
-    currentSort = { field, asc: currentSort.field===field ? !currentSort.asc : true }; 
-    updateAll(); 
-  }));
-  
+  function attachCertTriggers() { document.querySelectorAll('.cert-trigger').forEach(btn => { btn.removeEventListener('click', certHandler); btn.addEventListener('click', certHandler); }); }
+  function certHandler(e) { const btn = e.currentTarget; const ign = btn.getAttribute('data-ign'); const player = PLAYERS.find(p=>p.ign===ign); if(player) showCertificateModal(player); }
+  function renderTop() { const top3 = getGlobalRanked().slice(0,3); const medals = ['🥇','🥈','🥉']; document.getElementById('topPlayersGrid').innerHTML = top3.map((p,i)=>`<div class="top-card p-5 animate-slide-up cursor-pointer"><div class="flex justify-between items-start"><span class="text-3xl">${medals[i]}</span><span class="w-10 h-10 rounded-full flex items-center justify-center font-extrabold bg-[#1e2a3a]">#${i+1}</span></div><div style="display:flex;justify-content:center;margin:10px 0;">${getTopPlayerSkinImage(p.ign)}</div><div class="text-2xl font-black text-white mt-2 text-center">${escapeHtml(p.ign)}</div><div class="my-3 text-center">${getTierBadge(p.tier)}</div><div class="text-sm text-[#b8c7f0] text-center"><i class="fas fa-id-card mr-1 text-blue-400"></i>${escapeHtml(p.tester)}</div><button data-ign="${escapeHtml(p.ign)}" data-tier="${p.tier}" data-tester="${escapeHtml(p.tester)}" class="cert-trigger mt-4 w-full bg-[#1e2e4a] hover:bg-[#2f4060] py-2.5 rounded-xl text-sm font-bold transition flex items-center justify-center gap-2"><i class="fas fa-certificate text-blue-300"></i> Get Certificate</button></div>`).join(''); attachCertTriggers(); }
+  function renderTable() { const filtered = filterAndSortPlayers(); const disp = filtered.slice(0, displayLimit); const hasMore = filtered.length > displayLimit; const tbody = document.getElementById('tableBody'); if(disp.length===0){ tbody.innerHTML='<tr><td colspan="5" class="p-8 text-center text-[#8f9ec2]">No players found</td></tr>'; document.getElementById('paginationInfo').innerText='0 players'; document.getElementById('showMoreBtn').classList.add('hidden'); return; } let html = ''; disp.forEach(p => { const rank = getPlayerRank(p.ign); html += `<tr><td class="p-4"><span class="rank-number">#${rank}</span></td><td class="p-4 font-bold flex items-center gap-2"><i class="fas fa-gamepad text-blue-500"></i>${escapeHtml(p.ign)}</td><td class="p-4 text-[#cbd9ff]"><i class="fas fa-user-check mr-1 text-blue-400"></i>${escapeHtml(p.tester)}</td><td class="p-4">${getTierBadge(p.tier)}</td><td class="p-4 text-center"><button data-ign="${escapeHtml(p.ign)}" data-tier="${p.tier}" data-tester="${escapeHtml(p.tester)}" class="cert-trigger text-[#98b2f0] hover:text-white text-xl transition"><i class="fas fa-certificate"></i></button></td></tr>`; }); tbody.innerHTML = html; document.getElementById('paginationInfo').innerText = `Showing ${disp.length} of ${filtered.length} player${filtered.length!==1?'s':''}`; const moreBtn = document.getElementById('showMoreBtn'); if(hasMore && searchTerm === '') moreBtn.classList.remove('hidden'); else moreBtn.classList.add('hidden'); attachCertTriggers(); }
+  function renderSearchCard() { const container = document.getElementById('playerCardContainer'); if(!searchTerm.trim()) { container.classList.add('hidden'); return; } const filtered = filterAndSortPlayers(); const exact = PLAYERS.find(p=>p.ign.toLowerCase()===searchTerm.toLowerCase()) || filtered[0]; if(!exact) { container.innerHTML=`<div class="gamster-card p-8 text-center"><i class="fas fa-user-slash text-4xl mb-2"></i><p>No result</p></div>`; container.classList.remove('hidden'); return; } container.innerHTML = `<div class="gamster-card p-6 border-l-4 border-[#3b82f6]"><div class="flex flex-col items-center gap-3"><div class="w-20 h-20 rounded-full bg-gradient-to-b from-[#1e2b4e] to-[#0b1120] flex items-center justify-center border-2 border-blue-500"><i class="fas fa-user text-3xl text-blue-300"></i></div><h3 class="text-3xl font-black">${escapeHtml(exact.ign)}</h3>${getTierBadge(exact.tier)}<p class="text-[#b9c8ff]"><i class="fas fa-user-check mr-1"></i>Tester: ${escapeHtml(exact.tester)}</p><button data-ign="${escapeHtml(exact.ign)}" data-tier="${exact.tier}" data-tester="${exact.tester}" class="cert-trigger bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-xl font-bold flex gap-2"><i class="fas fa-certificate"></i> Get Certificate</button></div></div>`; container.classList.remove('hidden'); attachCertTriggers(); }
+  function updateAll() { document.getElementById('totalPlayers').innerText = PLAYERS.length; document.getElementById('totalPlayersNav').innerText = PLAYERS.length; renderTable(); renderTop(); renderSearchCard(); }
+  document.getElementById('searchInput').addEventListener('input', (e) => { searchTerm = e.target.value; displayLimit=10; document.getElementById('clearSearch').classList.toggle('hidden', !searchTerm); updateAll(); });
+  document.getElementById('clearSearch').addEventListener('click', () => { document.getElementById('searchInput').value=''; searchTerm=''; displayLimit=10; document.getElementById('clearSearch').classList.add('hidden'); updateAll(); });
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => { document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); currentFilter = btn.getAttribute('data-filter'); displayLimit=10; updateAll(); }));
+  document.querySelectorAll('[data-sort]').forEach(th => th.addEventListener('click', () => { const field = th.getAttribute('data-sort'); currentSort = { field, asc: currentSort.field===field ? !currentSort.asc : true }; updateAll(); }));
   document.getElementById('showMoreBtn').addEventListener('click', () => { displayLimit += 10; updateAll(); });
-  
-  window.addEventListener('scroll', () => { 
-    const btn=document.getElementById('backToTop'); 
-    if(window.scrollY>300) { btn.style.opacity='1'; btn.style.visibility='visible'; } 
-    else { btn.style.opacity='0'; btn.style.visibility='hidden'; } 
-  });
-  
+  window.addEventListener('scroll', () => { const btn=document.getElementById('backToTop'); if(window.scrollY>300) { btn.style.opacity='1'; btn.style.visibility='visible'; } else { btn.style.opacity='0'; btn.style.visibility='hidden'; } });
   document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
-  
   updateAll();
 })();
 </script>
