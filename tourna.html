@@ -1683,7 +1683,7 @@
 
   <button id="backToTop" style="position:fixed;bottom:2rem;right:2rem;background:#7c3aed;border:none;color:white;width:48px;height:48px;border-radius:50%;cursor:pointer;display:none;z-index:50; box-shadow:0 0 15px #7c3aed; font-size:1.2rem;"><i class="fas fa-arrow-up"></i></button>
 
-  <script>
+ <script>
     // ===================== TEAM DATA =====================
     const teams = [
       { id:1, name:"RTSK", seed:1, players:["Sgnatures","Oxc","PixelWarrior","Adam"], subs:["m7md"] },
@@ -1698,6 +1698,7 @@
       { id:10, name:"Something", seed:10, players:["_YungGuy_","L1CH","firechickenblade","cozacdani11"], subs:["snackzzz"] }
     ];
 
+    // Initialize leaderboard stats
     const leaderboardStats = {};
     teams.forEach(t => { leaderboardStats[t.name] = { wins: 0, losses: 0 }; });
 
@@ -1715,6 +1716,122 @@
       return board.map((item, idx) => ({ ...item, rank: idx+1 }));
     }
 
+    // ===================== AUTO-CALCULATE LEADERBOARD FROM BRACKET =====================
+    function calculateLeaderboardFromBracket() {
+        // Reset all stats
+        teams.forEach(t => {
+            leaderboardStats[t.name] = { wins: 0, losses: 0 };
+        });
+        
+        // Helper function to get real team name (resolves "PR1 Winner", "PR2 Winner", etc.)
+        function getRealTeamName(teamName) {
+            if (!teamName) return null;
+            if (teamName === "PR1 Winner") {
+                const pr1Match = bracketData.preliminary.find(m => m.matchId === "PR1");
+                return pr1Match && pr1Match.winner ? pr1Match.winner : null;
+            }
+            if (teamName === "PR2 Winner") {
+                const pr2Match = bracketData.preliminary.find(m => m.matchId === "PR2");
+                return pr2Match && pr2Match.winner ? pr2Match.winner : null;
+            }
+            if (teamName === "QF1 Winner") {
+                const qf1Match = bracketData.quarterFinals.find(m => m.matchId === "QF1");
+                return qf1Match && qf1Match.winner ? qf1Match.winner : null;
+            }
+            if (teamName === "QF2 Winner") {
+                const qf2Match = bracketData.quarterFinals.find(m => m.matchId === "QF2");
+                return qf2Match && qf2Match.winner ? qf2Match.winner : null;
+            }
+            if (teamName === "QF3 Winner") {
+                const qf3Match = bracketData.quarterFinals.find(m => m.matchId === "QF3");
+                return qf3Match && qf3Match.winner ? qf3Match.winner : null;
+            }
+            if (teamName === "QF4 Winner") {
+                const qf4Match = bracketData.quarterFinals.find(m => m.matchId === "QF4");
+                return qf4Match && qf4Match.winner ? qf4Match.winner : null;
+            }
+            if (teamName === "SF1 Winner") {
+                const sf1Match = bracketData.semiFinals.find(m => m.matchId === "SF1");
+                return sf1Match && sf1Match.winner ? sf1Match.winner : null;
+            }
+            if (teamName === "SF2 Winner") {
+                const sf2Match = bracketData.semiFinals.find(m => m.matchId === "SF2");
+                return sf2Match && sf2Match.winner ? sf2Match.winner : null;
+            }
+            return teamName;
+        }
+        
+        // Check preliminary round
+        bracketData.preliminary.forEach(match => {
+            if (match.winner && match.status === 'completed') {
+                const winner = getRealTeamName(match.winner);
+                const loser = match.winner === match.team1 ? match.team2 : match.team1;
+                const realLoser = getRealTeamName(loser);
+                
+                if (winner && leaderboardStats[winner]) {
+                    leaderboardStats[winner].wins += 1;
+                }
+                if (realLoser && realLoser !== winner && leaderboardStats[realLoser]) {
+                    leaderboardStats[realLoser].losses += 1;
+                }
+            }
+        });
+        
+        // Check quarter finals
+        bracketData.quarterFinals.forEach(match => {
+            if (match.winner && match.status === 'completed') {
+                const winner = getRealTeamName(match.winner);
+                const loser = match.winner === match.team1 ? match.team2 : match.team1;
+                const realLoser = getRealTeamName(loser);
+                
+                if (winner && leaderboardStats[winner]) {
+                    leaderboardStats[winner].wins += 1;
+                }
+                if (realLoser && realLoser !== winner && leaderboardStats[realLoser] && 
+                    realLoser !== "PR1 Winner" && realLoser !== "PR2 Winner") {
+                    leaderboardStats[realLoser].losses += 1;
+                }
+            }
+        });
+        
+        // Check semi finals
+        bracketData.semiFinals.forEach(match => {
+            if (match.winner && match.status === 'completed') {
+                const winner = getRealTeamName(match.winner);
+                const loser = match.winner === match.team1 ? match.team2 : match.team1;
+                const realLoser = getRealTeamName(loser);
+                
+                if (winner && leaderboardStats[winner]) {
+                    leaderboardStats[winner].wins += 1;
+                }
+                if (realLoser && realLoser !== winner && leaderboardStats[realLoser] && 
+                    realLoser !== "QF1 Winner" && realLoser !== "QF2 Winner" && 
+                    realLoser !== "QF3 Winner" && realLoser !== "QF4 Winner") {
+                    leaderboardStats[realLoser].losses += 1;
+                }
+            }
+        });
+        
+        // Check grand final
+        if (bracketData.grandFinal.winner && bracketData.grandFinal.status === 'completed') {
+            const winner = getRealTeamName(bracketData.grandFinal.winner);
+            const loser = bracketData.grandFinal.team1 === bracketData.grandFinal.winner ? 
+                          bracketData.grandFinal.team2 : bracketData.grandFinal.team1;
+            const realLoser = getRealTeamName(loser);
+            
+            if (winner && leaderboardStats[winner]) {
+                leaderboardStats[winner].wins += 1;
+            }
+            if (realLoser && realLoser !== winner && leaderboardStats[realLoser] && 
+                realLoser !== "SF1 Winner" && realLoser !== "SF2 Winner") {
+                leaderboardStats[realLoser].losses += 1;
+            }
+        }
+        
+        // Refresh leaderboard display
+        renderLeaderboard();
+    }
+
     const fixtures = [
       { matchNumber:1, round:"Preliminary", teamA:"MommyAktivesDomination", teamB:"Something" },
       { matchNumber:2, round:"Preliminary", teamA:"Pinkysss", teamB:"PuionFire" },
@@ -1726,7 +1843,7 @@
 
     const bracketData = {
       preliminary: [
-        { matchId:"PR1", team1:"MommyAktivesDomination", team2:"Something", seed1:7, seed2:10, score1:null, score2:null, winner:null, status:"pending" },
+        { matchId:"PR1", team1:"MommyAktivesDomination", team2:"Something", seed1:7, seed2:10, score1:2, score2:0, winner:"MommyAktivesDomination", status:"completed" },
         { matchId:"PR2", team1:"Pinkysss", team2:"PuionFire", seed1:8, seed2:9, score1:null, score2:null, winner:null, status:"pending" }
       ],
       quarterFinals: [
@@ -1737,10 +1854,59 @@
       ],
       semiFinals: [
         { matchId:"SF1", team1:"QF1 Winner", team2:"QF2 Winner", seed1:null, seed2:null, score1:null, score2:null, winner:null, status:"pending" },
-        { matchId:"SF2", team1:"KewJillers ", team2:"QF4 Winner", seed1:null, seed2:null, score1:null, score2:null, winner:null, status:"pending" }
+        { matchId:"SF2", team1:"KewJillers", team2:"QF4 Winner", seed1:null, seed2:null, score1:null, score2:null, winner:null, status:"pending" }
       ],
       grandFinal: { matchId:"GF", team1:"SF1 Winner", team2:"SF2 Winner", seed1:null, seed2:null, score1:null, score2:null, winner:null, status:"pending" }
     };
+
+    // Call this function whenever you update any match result
+    function updateMatchResult(matchId, winner, score1, score2, status = "completed") {
+        // Find and update the match in bracketData
+        let match = null;
+        
+        // Check preliminary
+        match = bracketData.preliminary.find(m => m.matchId === matchId);
+        if (match) {
+            match.winner = winner;
+            match.score1 = score1;
+            match.score2 = score2;
+            match.status = status;
+        }
+        
+        // Check quarter finals
+        if (!match) match = bracketData.quarterFinals.find(m => m.matchId === matchId);
+        if (match) {
+            match.winner = winner;
+            match.score1 = score1;
+            match.score2 = score2;
+            match.status = status;
+        }
+        
+        // Check semi finals
+        if (!match) match = bracketData.semiFinals.find(m => m.matchId === matchId);
+        if (match) {
+            match.winner = winner;
+            match.score1 = score1;
+            match.score2 = score2;
+            match.status = status;
+        }
+        
+        // Check grand final
+        if (!match && matchId === "GF") {
+            match = bracketData.grandFinal;
+            match.winner = winner;
+            match.score1 = score1;
+            match.score2 = score2;
+            match.status = status;
+        }
+        
+        // Recalculate leaderboard from bracket
+        calculateLeaderboardFromBracket();
+        
+        // Re-render bracket and fixtures
+        renderBracket();
+        renderFixtures();
+    }
 
     function escapeHtml(str) {
       if (!str) return '';
@@ -1857,6 +2023,7 @@
       }
       requestAnimationFrame(update);
     }
+    
     function runStatAnimations() {
       document.querySelectorAll('.stat-num-3d').forEach((el, i) => {
         const target = parseInt(el.dataset.target);
@@ -2197,7 +2364,8 @@
       renderTeams();
       renderBracket();
       renderFixtures();
-      renderLeaderboard();
+      // Calculate leaderboard from bracket data on load
+      calculateLeaderboardFromBracket();
       generateOrbs();
       runStatAnimations();
       
