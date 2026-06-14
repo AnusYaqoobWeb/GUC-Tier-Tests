@@ -1451,10 +1451,638 @@
   </style>
 </head>
 <body>
-  <div class="bg-animation"></div>
-  <div id="loadingScreen" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0f172a;display:flex;align-items:center;justify-content:center;z-index:9999;transition: opacity 0.5s;">
-    <div style="text-align:center;color:var(--secondary);font-size:2rem; font-weight:bold;"><i class="fas fa-bolt"></i> 4v4 TOURNAMENT <i class="fas fa-bolt"></i></div>
+  <!-- ═══════════════════════════════════════════════════════════════
+     🏆 ULTIMATE 3D VICTORY LOADER — Cinematic AI Popup Edition
+     Scoped • Self-Contained • Auto-Destroying • Zero Conflicts
+     ═══════════════════════════════════════════════════════════════ -->
+<div id="victoryLoader" aria-hidden="true">
+  <canvas id="vl-canvas"></canvas>
+  
+  <!-- Lightning flash overlay -->
+  <div class="vl-flash"></div>
+  
+  <!-- Shockwave rings -->
+  <div class="vl-shockwave"></div>
+  <div class="vl-shockwave vl-shockwave-2"></div>
+  
+  <!-- 3D Stage -->
+  <div class="vl-stage">
+    <div class="vl-scene">
+      
+      <!-- Floating Trophy with 3D rotation -->
+      <div class="vl-trophy-wrap">
+        <div class="vl-trophy-glow"></div>
+        <div class="vl-trophy">🏆</div>
+        <div class="vl-trophy-base"></div>
+      </div>
+      
+      <!-- Glitch Title -->
+      <div class="vl-title-wrap">
+        <div class="vl-subtitle">⚔ 4V4 TOURNAMENT ⚔</div>
+        <h1 class="vl-title" data-text="CHAMPIONS">CHAMPIONS</h1>
+        <div class="vl-victory">★ VICTORY ★</div>
+      </div>
+      
+      <!-- 3D Champion Cards -->
+      <div class="vl-champions">
+        <div class="vl-champ" style="--i:0; --c:#FBBF24;">
+          <div class="vl-champ-inner">
+            <span class="vl-champ-icon">🥶</span>
+            <span class="vl-champ-name">ItzCold_yt</span>
+          </div>
+        </div>
+        <div class="vl-champ" style="--i:1; --c:#A855F7;">
+          <div class="vl-champ-inner">
+            <span class="vl-champ-icon">👑</span>
+            <span class="vl-champ-name">xAlexk3ng_</span>
+          </div>
+        </div>
+        <div class="vl-champ" style="--i:2; --c:#EC4899;">
+          <div class="vl-champ-inner">
+            <span class="vl-champ-icon">🔥</span>
+            <span class="vl-champ-name">UkOnly</span>
+          </div>
+        </div>
+        <div class="vl-champ" style="--i:3; --c:#3B82F6;">
+          <div class="vl-champ-inner">
+            <span class="vl-champ-icon">👿</span>
+            <span class="vl-champ-name">Swmkf</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- AI Loading Bar -->
+      <div class="vl-loader-wrap">
+        <div class="vl-loader-bar"><div class="vl-loader-fill"></div></div>
+        <div class="vl-loader-text">
+          <span>◢</span>RΞΔL GØΔTS<span>◣</span>
+        </div>
+      </div>
+      
+    </div>
   </div>
+</div>
+
+<style>
+  /* ═══ SCOPED STYLES — All prefixed with #victoryLoader / .vl- ═══ */
+  
+  #victoryLoader {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background:
+      radial-gradient(ellipse at center, #1a0b3d 0%, #0a0518 50%, #000 100%);
+    overflow: hidden;
+    perspective: 1500px;
+    transform-style: preserve-3d;
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    animation: vl-shake 0.6s ease-out 0.2s, vl-fadeIn 0.4s ease-out;
+  }
+  
+  #victoryLoader.vl-hide {
+    animation: vl-zoomOut 1s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+    pointer-events: none;
+  }
+  
+  #victoryLoader * { box-sizing: border-box; }
+  
+  #victoryLoader #vl-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  
+  /* Lightning flash */
+  #victoryLoader .vl-flash {
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    opacity: 0;
+    animation: vl-flash 0.5s ease-out 0.1s;
+    pointer-events: none;
+  }
+  
+  /* Shockwave rings */
+  #victoryLoader .vl-shockwave {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 100px; height: 100px;
+    border: 3px solid #FBBF24;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: vl-shockwave 2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+    opacity: 0;
+    pointer-events: none;
+  }
+  #victoryLoader .vl-shockwave-2 {
+    border-color: #A855F7;
+    animation-delay: 0.5s;
+  }
+  
+  /* 3D Stage */
+  #victoryLoader .vl-stage {
+    position: relative;
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    z-index: 10;
+  }
+  
+  #victoryLoader .vl-scene {
+    text-align: center;
+    transform-style: preserve-3d;
+    animation: vl-scenePop 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    padding: 1rem;
+    max-width: 95vw;
+  }
+  
+  /* Trophy */
+  #victoryLoader .vl-trophy-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+    transform-style: preserve-3d;
+    animation: vl-trophyEnter 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards,
+               vl-float 3s ease-in-out 1.6s infinite;
+  }
+  
+  #victoryLoader .vl-trophy {
+    font-size: clamp(4rem, 12vw, 7rem);
+    line-height: 1;
+    filter: drop-shadow(0 0 40px #FBBF24) drop-shadow(0 0 80px #FBBF24);
+    transform-style: preserve-3d;
+    animation: vl-trophySpin 6s linear infinite;
+    position: relative;
+    z-index: 2;
+  }
+  
+  #victoryLoader .vl-trophy-glow {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(251,191,36,0.6) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    animation: vl-pulse 2s ease-in-out infinite;
+    z-index: 1;
+  }
+  
+  #victoryLoader .vl-trophy-base {
+    position: absolute;
+    bottom: -10px; left: 50%;
+    width: 120px; height: 20px;
+    background: radial-gradient(ellipse, rgba(251,191,36,0.5), transparent 70%);
+    transform: translateX(-50%);
+    filter: blur(8px);
+  }
+  
+  /* Titles */
+  #victoryLoader .vl-title-wrap {
+    margin: 0.5rem 0;
+    transform-style: preserve-3d;
+  }
+  
+  #victoryLoader .vl-subtitle {
+    font-size: clamp(0.7rem, 2vw, 1rem);
+    color: #C084FC;
+    letter-spacing: 0.5em;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    animation: vl-slideIn 0.8s ease-out 0.6s backwards;
+    text-shadow: 0 0 20px #A855F7;
+  }
+  
+  #victoryLoader .vl-title {
+    font-size: clamp(2.5rem, 10vw, 6rem);
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: 0.15em;
+    background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 25%, #EC4899 50%, #A855F7 75%, #FBBF24 100%);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    position: relative;
+    animation: vl-titleEnter 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.7s backwards,
+               vl-gradientShift 4s ease infinite 1.7s;
+    text-shadow: 0 0 60px rgba(251, 191, 36, 0.5);
+    line-height: 1;
+  }
+  
+  #victoryLoader .vl-title::before,
+  #victoryLoader .vl-title::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  #victoryLoader .vl-title::before {
+    animation: vl-glitch1 3s infinite 2s;
+    color: #EC4899;
+    -webkit-text-fill-color: #EC4899;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    opacity: 0.8;
+    mix-blend-mode: screen;
+  }
+  
+  #victoryLoader .vl-title::after {
+    animation: vl-glitch2 3s infinite 2s;
+    color: #06B6D4;
+    -webkit-text-fill-color: #06B6D4;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    opacity: 0.8;
+    mix-blend-mode: screen;
+  }
+  
+  #victoryLoader .vl-victory {
+    font-size: clamp(1rem, 3.5vw, 1.8rem);
+    font-weight: 800;
+    color: #FBBF24;
+    letter-spacing: 0.4em;
+    margin-top: 0.5rem;
+    animation: vl-slideIn 0.8s ease-out 1s backwards;
+    text-shadow: 0 0 20px #FBBF24, 0 0 40px #F59E0B;
+  }
+  
+  /* Champion Cards */
+  #victoryLoader .vl-champions {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin: 1.8rem 0 1.2rem;
+    flex-wrap: wrap;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  #victoryLoader .vl-champ {
+    transform-style: preserve-3d;
+    animation: vl-champPop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) backwards,
+               vl-champFloat 4s ease-in-out infinite;
+    animation-delay: calc(1.2s + var(--i) * 0.15s), calc(2s + var(--i) * 0.3s);
+  }
+  
+  #victoryLoader .vl-champ-inner {
+    background: linear-gradient(135deg, rgba(139,92,246,0.25), rgba(0,0,0,0.6));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid var(--c);
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 
+      0 0 20px var(--c),
+      0 0 40px rgba(139,92,246,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+    transform: translateZ(20px);
+    transition: transform 0.3s;
+  }
+  
+  #victoryLoader .vl-champ-icon {
+    font-size: 1.1rem;
+    filter: drop-shadow(0 0 8px var(--c));
+  }
+  
+  #victoryLoader .vl-champ-name {
+    color: #fff;
+    font-weight: 700;
+    font-size: clamp(0.75rem, 2vw, 0.95rem);
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 10px var(--c);
+  }
+  
+  /* Loading Bar */
+  #victoryLoader .vl-loader-wrap {
+    margin-top: 1.5rem;
+    animation: vl-slideIn 0.8s ease-out 2s backwards;
+  }
+  
+  #victoryLoader .vl-loader-bar {
+    width: clamp(180px, 30vw, 280px);
+    height: 6px;
+    background: rgba(139,92,246,0.2);
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 0 auto;
+    box-shadow: 0 0 15px rgba(139,92,246,0.5), inset 0 0 5px rgba(0,0,0,0.5);
+  }
+  
+  #victoryLoader .vl-loader-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FBBF24, #EC4899, #A855F7, #FBBF24);
+    background-size: 200% 100%;
+    border-radius: 999px;
+    animation: vl-fillBar 2.8s ease-out 2s forwards,
+               vl-shimmer 1.5s linear infinite 2s;
+    width: 0%;
+    box-shadow: 0 0 15px #FBBF24;
+  }
+  
+  #victoryLoader .vl-loader-text {
+    margin-top: 0.8rem;
+    color: #94A3B8;
+    font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+    letter-spacing: 0.4em;
+    font-weight: 600;
+    animation: vl-pulse-text 1.5s ease-in-out infinite;
+  }
+  
+  #victoryLoader .vl-loader-text span {
+    color: #FBBF24;
+    margin: 0 0.5rem;
+  }
+  
+  /* ═══════════ KEYFRAMES ═══════════ */
+  @keyframes vl-fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes vl-zoomOut {
+    0% { opacity: 1; transform: scale(1); filter: blur(0); }
+    50% { opacity: 1; transform: scale(1.05); filter: blur(0); }
+    100% { opacity: 0; transform: scale(0.85); filter: blur(20px); visibility: hidden; }
+  }
+  
+  @keyframes vl-shake {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-5px, 3px); }
+    20% { transform: translate(6px, -4px); }
+    30% { transform: translate(-4px, 5px); }
+    40% { transform: translate(5px, 2px); }
+    50% { transform: translate(-3px, -3px); }
+    60% { transform: translate(4px, 4px); }
+    70% { transform: translate(-5px, 2px); }
+    80% { transform: translate(3px, -3px); }
+    90% { transform: translate(-2px, 2px); }
+  }
+  
+  @keyframes vl-flash {
+    0% { opacity: 0; }
+    20% { opacity: 0.9; }
+    100% { opacity: 0; }
+  }
+  
+  @keyframes vl-shockwave {
+    0% { width: 50px; height: 50px; opacity: 1; border-width: 4px; }
+    100% { width: 2500px; height: 2500px; opacity: 0; border-width: 1px; }
+  }
+  
+  @keyframes vl-scenePop {
+    0% { opacity: 0; transform: scale(0.3) rotateX(-30deg) translateZ(-500px); }
+    60% { opacity: 1; transform: scale(1.05) rotateX(5deg) translateZ(0); }
+    100% { opacity: 1; transform: scale(1) rotateX(0) translateZ(0); }
+  }
+  
+  @keyframes vl-trophyEnter {
+    0% { opacity: 0; transform: scale(0) rotateY(-720deg) translateZ(-300px); }
+    100% { opacity: 1; transform: scale(1) rotateY(0) translateZ(0); }
+  }
+  
+  @keyframes vl-trophySpin {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+  }
+  
+  @keyframes vl-float {
+    0%, 100% { transform: translateY(0) rotateZ(-2deg); }
+    50% { transform: translateY(-15px) rotateZ(2deg); }
+  }
+  
+  @keyframes vl-pulse {
+    0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.3); }
+  }
+  
+  @keyframes vl-titleEnter {
+    0% { opacity: 0; transform: translateY(50px) rotateX(-90deg) scale(0.5); letter-spacing: 1em; filter: blur(20px); }
+    60% { letter-spacing: 0.05em; }
+    100% { opacity: 1; transform: translateY(0) rotateX(0) scale(1); letter-spacing: 0.15em; filter: blur(0); }
+  }
+  
+  @keyframes vl-gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  @keyframes vl-glitch1 {
+    0%, 90%, 100% { transform: translate(0); opacity: 0; }
+    92% { transform: translate(-3px, 1px); opacity: 0.8; }
+    94% { transform: translate(2px, -2px); opacity: 0.8; }
+    96% { transform: translate(-2px, 0); opacity: 0.8; }
+    98% { transform: translate(0, 1px); opacity: 0; }
+  }
+  
+  @keyframes vl-glitch2 {
+    0%, 90%, 100% { transform: translate(0); opacity: 0; }
+    93% { transform: translate(3px, -1px); opacity: 0.8; }
+    95% { transform: translate(-2px, 2px); opacity: 0.8; }
+    97% { transform: translate(2px, 0); opacity: 0.8; }
+  }
+  
+  @keyframes vl-slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes vl-champPop {
+    0% { opacity: 0; transform: scale(0) rotateY(180deg) translateZ(-200px); }
+    70% { transform: scale(1.15) rotateY(0) translateZ(30px); }
+    100% { opacity: 1; transform: scale(1) rotateY(0) translateZ(20px); }
+  }
+  
+  @keyframes vl-champFloat {
+    0%, 100% { transform: translateY(0) translateZ(20px) rotateY(0); }
+    50% { transform: translateY(-8px) translateZ(40px) rotateY(8deg); }
+  }
+  
+  @keyframes vl-fillBar {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+  
+  @keyframes vl-shimmer {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+  
+  @keyframes vl-pulse-text {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+  
+  /* Reduced motion accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    #victoryLoader,
+    #victoryLoader * {
+      animation-duration: 0.5s !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    #victoryLoader .vl-champions { gap: 0.4rem; }
+    #victoryLoader .vl-champ-inner { padding: 0.4rem 0.8rem; }
+  }
+</style>
+
+<script>
+  (function() {
+    'use strict';
+    
+    const loader = document.getElementById('victoryLoader');
+    const canvas = document.getElementById('vl-canvas');
+    if (!loader || !canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    let rafId = null;
+    let particles = [];
+    let sparks = [];
+    
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    
+    // Golden confetti particles
+    const COLORS = ['#FBBF24', '#F59E0B', '#EC4899', '#A855F7', '#8B5CF6', '#06B6D4', '#fff'];
+    
+    function createParticles() {
+      particles = [];
+      const count = Math.min(150, Math.floor((canvas.width * canvas.height) / 12000));
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          z: Math.random() * 3 + 0.5,
+          r: Math.random() * 2.5 + 0.5,
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.4 - 0.1,
+          a: Math.random() * 0.6 + 0.3,
+          color: COLORS[Math.floor(Math.random() * COLORS.length)],
+          twinkle: Math.random() * Math.PI * 2
+        });
+      }
+    }
+    createParticles();
+    
+    // Explosion burst at start
+    function createSparks() {
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+      for (let i = 0; i < 80; i++) {
+        const angle = (Math.PI * 2 * i) / 80;
+        const speed = Math.random() * 8 + 4;
+        sparks.push({
+          x: cx, y: cy,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          life: 1,
+          color: COLORS[Math.floor(Math.random() * COLORS.length)],
+          size: Math.random() * 3 + 1
+        });
+      }
+    }
+    setTimeout(createSparks, 200);
+    setTimeout(createSparks, 800);
+    
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw floating particles (3D depth via z)
+      particles.forEach(p => {
+        p.x += p.vx * p.z;
+        p.y += p.vy * p.z;
+        p.twinkle += 0.05;
+        
+        if (p.x < -10) p.x = canvas.width + 10;
+        if (p.x > canvas.width + 10) p.x = -10;
+        if (p.y < -10) p.y = canvas.height + 10;
+        if (p.y > canvas.height + 10) p.y = -10;
+        
+        const alpha = p.a * (0.6 + 0.4 * Math.sin(p.twinkle));
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = p.color;
+        ctx.shadowBlur = 15 * p.z;
+        ctx.shadowColor = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * p.z, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+      
+      // Draw explosion sparks
+      sparks = sparks.filter(s => s.life > 0);
+      sparks.forEach(s => {
+        s.x += s.vx;
+        s.y += s.vy;
+        s.vy += 0.15; // gravity
+        s.vx *= 0.98;
+        s.life -= 0.015;
+        
+        ctx.save();
+        ctx.globalAlpha = s.life;
+        ctx.fillStyle = s.color;
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = s.color;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size * s.life, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+      
+      rafId = requestAnimationFrame(animate);
+    }
+    animate();
+    
+    // Resize handler (debounced)
+    let resizeTimer;
+    function onResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        resize();
+        createParticles();
+      }, 150);
+    }
+    window.addEventListener('resize', onResize);
+    
+    // Lock scroll while loader shows
+    const originalOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    
+    // Cleanup & exit
+    function destroy() {
+      loader.classList.add('vl-hide');
+      setTimeout(() => {
+        cancelAnimationFrame(rafId);
+        window.removeEventListener('resize', onResize);
+        document.documentElement.style.overflow = originalOverflow;
+        if (loader.parentNode) loader.parentNode.removeChild(loader);
+      }, 1000);
+    }
+    
+    // Run for 4 seconds, then disappear with cinematic zoom-out
+    setTimeout(destroy, 4000);
+    
+    // Optional: click anywhere to skip
+    loader.addEventListener('click', destroy, { once: true });
+  })();
+</script>
+
+ 
 
   <div class="container">
     <nav class="navbar">
@@ -1590,7 +2218,7 @@
           <div class="trophy-3d"><i class="fas fa-trophy"></i></div>
           <div>
             <div style="font-size:0.75rem; letter-spacing:2px; color:#94a3b8; text-transform:uppercase;">Current Tournament Winner</div>
-            <div style="font-size:1.6rem; font-weight:800; color:var(--gold); text-shadow:0 0 15px rgba(250,204,21,0.5); margin-top:0.3rem;">?</div>
+            <div style="font-size:1.6rem; font-weight:800; color:var(--gold); text-shadow:0 0 15px rgba(250,204,21,0.5); margin-top:0.3rem;">𝗨𝗞𝗣9 ◈ Ω𝗠𝗘𝗚𝗔 ◈ 𝗔𝗟𝗘𝗫</div>
             <div style="font-size:0.85rem; color:#cbd5e1; margin-top:0.3rem;"><i class="fas fa-star"></i> Path to Grand Final</div>
           </div>
         </div>
@@ -1856,7 +2484,7 @@
         { matchId:"SF1", team1:"PuionFire", team2:"ukp9omegaalex", seed1:null, seed2:null, score1:0, score2:3, winner:"ukp9omegaalex", status:"completed" },
         { matchId:"SF2", team1:"KewJillers", team2:"MommyAktivesDomination", seed1:null, seed2:null, score1:2, score2:1, winner:"KewJillers", status:"completed" }
       ],
-      grandFinal: { matchId:"GF", team1:"ukp9omegaalex", team2:"KewJillers", seed1:null, seed2:null, score1:null, score2:null, winner:null, status:"pending" }
+      grandFinal: { matchId:"GF", team1:"ukp9omegaalex", team2:"KewJillers", seed1:null, seed2:null, score1:3, score2:1, winner:"ukp9omegaalex", status:"completed" }
     };
 
     // Call this function whenever you update any match result
