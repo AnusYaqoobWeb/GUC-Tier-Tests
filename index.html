@@ -865,7 +865,8 @@
           GAMSTER<span class="text-blue-400">TIER</span></div>
         <div
           class="hidden sm:flex text-xs bg-[#1e2b4e] px-3 py-1.5 rounded-full text-blue-200 border border-[#3b82f6]/50">
-          <i class="fas fa-shield-alt mr-1"></i> GUC · OFFICIAL</div>
+          <i class="fas fa-shield-alt mr-1"></i> GUC · OFFICIAL
+        </div>
       </div>
 
       <a href="/tourna.html"
@@ -931,7 +932,8 @@
       <div class="flex items-center gap-3 mb-5">
         <div
           class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#1e2b4e] to-[#0f172a] flex items-center justify-center border border-[#3b82f6]">
-          <i class="fas fa-medal text-[#fbbf24] text-xl"></i></div>
+          <i class="fas fa-medal text-[#fbbf24] text-xl"></i>
+        </div>
         <h2 class="text-2xl font-extrabold text-white">🏆 Elite Performers</h2>
       </div>
       <div id="topPlayersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger-grid"></div>
@@ -984,17 +986,16 @@
         { ign: "Telshi", tester: "oth", tier: "A+" },
 
         { ign: "UkOnly", tester: "432_", tier: "A" },
-        { ign: "Cllass", tester: "oth", tier: "A" },
         { ign: "Swmkf", tester: "432", tier: "A" },
         { ign: "xalexk3ng_", tester: "432_", tier: "A" },
-      
+        { ign: "Cllass", tester: "oth", tier: "A" },
         { ign: "ZerotTick", tester: "432_", tier: "A" },
-{ ign: "raifxq", tester: "oth0098", tier: "A-" },
+        { ign: "raifxq", tester: "oth0098", tier: "A-" },
         { ign: "Disheet", tester: "432", tier: "A-" },
 
         { ign: "Sgnatures_", tester: "432", tier: "A-" },
         { ign: "MinoTotoro", tester: "oth0098", tier: "A-" },
-        
+
         { ign: "KitsuneKraze", tester: "432", tier: "A-" },
 
 
@@ -1050,7 +1051,7 @@
       }
 
       function getTopPlayerSkinImage(ign) {
-        const skins = { "Telshi": "/skins/telshi.png", "UkOnly": "/skins/oo.png", "Cllass": "/skins/cllass.png" };
+        const skins = { "Telshi": "/skins/telshi.png", "UkOnly": "/skins/oo.png", "Swmkf": "/skins/swmm.png" };
         return `<img src="${skins[ign] || '/skins/default.png'}" alt="${ign}" class="top-player-skin" onerror="this.onerror=null; this.src='/skins/default.png';">`;
       }
 
